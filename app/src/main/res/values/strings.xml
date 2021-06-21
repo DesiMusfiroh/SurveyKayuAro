@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">SurveiKayuAro</string>
+    <string name="nama_kedai">Nama Kedai</string>
+    <string name="title_survei">Survei Pelanggan Teh Kayu Aro</string>
+    <string name="form_survey">Form Survey</string>
+    <string name="alamat_kedai">Alamat Kedai</string>
+    <string name="simpan">Simpan</string>
+    <string name="export">Export to CSV</string>
+    <string name="telp_kedai">Nomor Telepon Kedai</string>
+    <string name="csv_file_generated_text">CSV File berhasil dibuat</string>
+    <string name="csv_file_not_generated_text">CSV File gagal dibuat</string>
+</resources>
