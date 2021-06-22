@@ -1,14 +1,14 @@
 <resources>
-    <string name="app_name">SurveiKayuAro</string>
-    <string name="title_survei">Survei Pelanggan Teh Kayu Aro</string>
+    <string name="app_name">Survey Pelanggan Teh Kayu Aro</string>
+    <string name="title_survei">Form Survei</string>
     <string name="form_survey">Form Survey</string>
     <string name="csv_file_generated_text">CSV File berhasil dibuat</string>
     <string name="csv_file_not_generated_text">CSV File gagal dibuat</string>
+    <string name="simpan">Simpan</string>
+    <string name="export">Export to CSV</string>
 
     <string name="nama_kedai">Nama Kedai</string>
     <string name="alamat_kedai">Alamat Kedai</string>
-    <string name="simpan">Simpan</string>
-    <string name="export">Export to CSV</string>
     <string name="telp_kedai">08 …</string>
     <string name="nama_narasumber">Nama yang diinterview</string>
     <string name="posisi_narasumber">Pemilik / dsb</string>
@@ -21,7 +21,7 @@
     <string name="bantuan">contoh: promosi, dsb</string>
     <string name="jika_tidak">alasan</string>
     <string name="nama_surveyor">Nama</string>
-    <string name="saran">Masukan dan saran</string>
+    <string name="saran">masukan dan saran</string>
 
     <string name="title_nama_kedai">Nama Kedai / Toko / Grosir </string>
     <string name="title_alamat_kedai">Alamat Kedai / Toko / Grosir</string>
@@ -39,4 +39,6 @@
     <string name="title_saran">Masukan dan Saran</string>
     <string name="title_bantuan">Apa yang dapat kami bantu agar bapak/ibu dapat menjual Teh kayu Aro ?</string>
     <string name="save_data_success">Data Survey berhasil disimpan</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
