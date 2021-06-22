@@ -1,4 +1,4 @@
-package com.ptpn.surveykayuaro
+package com.ptpn.surveykayuaro.utils
 
 import android.content.Context
 import android.content.Intent

@@ -12,8 +12,4 @@ interface SurveyDao {
 
     @Query("SELECT * FROM data_survey")
     fun getSurveys(): LiveData<List<SurveyEntity>>
-
-
-    @get:Query("SELECT * FROM data_survey")
-    val allSurveyData: LiveData<List<SurveyEntity>>
 }

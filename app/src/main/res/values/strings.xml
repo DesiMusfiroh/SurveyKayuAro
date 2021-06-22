@@ -1,12 +1,42 @@
 <resources>
     <string name="app_name">SurveiKayuAro</string>
-    <string name="nama_kedai">Nama Kedai</string>
     <string name="title_survei">Survei Pelanggan Teh Kayu Aro</string>
     <string name="form_survey">Form Survey</string>
+    <string name="csv_file_generated_text">CSV File berhasil dibuat</string>
+    <string name="csv_file_not_generated_text">CSV File gagal dibuat</string>
+
+    <string name="nama_kedai">Nama Kedai</string>
     <string name="alamat_kedai">Alamat Kedai</string>
     <string name="simpan">Simpan</string>
     <string name="export">Export to CSV</string>
-    <string name="telp_kedai">Nomor Telepon Kedai</string>
-    <string name="csv_file_generated_text">CSV File berhasil dibuat</string>
-    <string name="csv_file_not_generated_text">CSV File gagal dibuat</string>
+    <string name="telp_kedai">08 …</string>
+    <string name="nama_narasumber">Nama yang diinterview</string>
+    <string name="posisi_narasumber">Pemilik / dsb</string>
+    <string name="lama_berjualan">.. tahun / bulan</string>
+    <string name="teh_dijual">contoh: Sariwangi, Singa, dsb</string>
+    <string name="kenal_tehkayuaro">sudah / belum</string>
+    <string name="teh_terlaris">Merk teh terlaris</string>
+    <string name="harga_termurah">Rp. …</string>
+    <string name="mau_jual_tehkayuaro">iya / tidak</string>
+    <string name="bantuan">contoh: promosi, dsb</string>
+    <string name="jika_tidak">alasan</string>
+    <string name="nama_surveyor">Nama</string>
+    <string name="saran">Masukan dan saran</string>
+
+    <string name="title_nama_kedai">Nama Kedai / Toko / Grosir </string>
+    <string name="title_alamat_kedai">Alamat Kedai / Toko / Grosir</string>
+    <string name="title_telp_kedai">Nomor Telepon Kedai / Toko / Grosir</string>
+    <string name="title_nama_narasumber">Nama yang diinterview</string>
+    <string name="title_posisi_narasumber">Posisi yang diinterview</string>
+    <string name="title_lama_berjualan">Berapa lama sudah berjualan ?</string>
+    <string name="title_teh_dijual">Teh apa saja yang dijual ?</string>
+    <string name="title_kenal_tehkayuaro">Apa sudah kenal Teh Kayu Aro ?</string>
+    <string name="title_teh_terlaris">Teh apa yang paling laris di kedai/toko/grosir ini ?</string>
+    <string name="title_harga_termurah">Berapa harga termurah teh yang dijual di kedai/toko/grosir ini ?</string>
+    <string name="title_mau_jual_tehkayuaro">Mau menjual Teh Kayu Aro ? Kita akan berikan promo dan sale.</string>
+    <string name="title_jika_tidak">Jika tidak, kenapa ?</string>
+    <string name="title_nama_surveyor">Nama Surveyor</string>
+    <string name="title_saran">Masukan dan Saran</string>
+    <string name="title_bantuan">Apa yang dapat kami bantu agar bapak/ibu dapat menjual Teh kayu Aro ?</string>
+    <string name="save_data_success">Data Survey berhasil disimpan</string>
 </resources>

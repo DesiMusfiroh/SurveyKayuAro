@@ -27,42 +27,260 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView">
 
+            <TextView
+                style="@style/Text.Medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/title_nama_kedai"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="16dp"/>
+
             <com.google.android.material.textfield.TextInputEditText
+                style="@style/Text.Medium"
                 android:id="@+id/tv_nama_kedai"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/bg_input"
+                android:padding="16dp"
                 android:hint="@string/nama_kedai" />
+
+            <TextView
+                style="@style/Text.Medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/title_alamat_kedai"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="16dp"/>
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tv_alamat_kedai"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/bg_input"
+                android:padding="16dp"
                 android:hint="@string/alamat_kedai" />
+
+            <TextView
+                style="@style/Text.Medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/title_telp_kedai"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="16dp"/>
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tv_telp_kedai"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/bg_input"
+                android:padding="16dp"
                 android:hint="@string/telp_kedai" />
+
+            <TextView
+                style="@style/Text.Medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/title_nama_narasumber"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="16dp"/>
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tv_nama_narasumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_input"
+                android:padding="16dp"
+                android:hint="@string/nama_narasumber" />
+
+            <TextView
+                style="@style/Text.Medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/title_posisi_narasumber"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="16dp"/>
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tv_posisi_narasumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_input"
+                android:padding="16dp"
+                android:hint="@string/posisi_narasumber" />
+
+            <TextView
+                style="@style/Text.Medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/title_lama_berjualan"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="16dp"/>
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tv_lama_berjualan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_input"
+                android:padding="16dp"
+                android:hint="@string/lama_berjualan" />
+
+            <TextView
+                style="@style/Text.Medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/title_teh_dijual"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="16dp"/>
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tv_teh_dijual"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_input"
+                android:padding="16dp"
+                android:hint="@string/teh_dijual" />
+
+            <TextView
+                style="@style/Text.Medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/title_kenal_tehkayuaro"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="16dp"/>
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tv_kenal_tehkayuaro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_input"
+                android:padding="16dp"
+                android:hint="@string/kenal_tehkayuaro" />
+
+            <TextView
+                style="@style/Text.Medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/title_teh_terlaris"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="16dp"/>
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tv_teh_terlaris"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_input"
+                android:padding="16dp"
+                android:hint="@string/teh_terlaris" />
+
+            <TextView
+                style="@style/Text.Medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/title_harga_termurah"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="16dp"/>
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tv_harga_termurah"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_input"
+                android:padding="16dp"
+                android:hint="@string/harga_termurah" />
+
+            <TextView
+                style="@style/Text.Medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/title_mau_jual_tehkayuaro"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="16dp"/>
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tv_mau_jual_tehkayuaro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_input"
+                android:padding="16dp"
+                android:hint="@string/mau_jual_tehkayuaro" />
+
+            <TextView
+                style="@style/Text.Medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/title_jika_tidak"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="16dp"/>
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tv_jika_tidak"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_input"
+                android:padding="16dp"
+                android:hint="@string/jika_tidak" />
+
+            <TextView
+                style="@style/Text.Medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/title_bantuan"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="16dp"/>
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tv_bantuan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_input"
+                android:padding="16dp"
+                android:hint="@string/bantuan" />
+
+            <TextView
+                style="@style/Text.Medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/title_nama_surveyor"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="16dp"/>
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tv_nama_surveyor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_input"
+                android:padding="16dp"
+                android:hint="@string/nama_surveyor" />
+
+            <TextView
+                style="@style/Text.Medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/title_saran"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="16dp"/>
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tv_saran"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_input"
+                android:padding="16dp"
+                android:hint="@string/saran" />
 
             <Button
                 android:id="@+id/btn_save"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/simpan"/>
-
-            <Button
-                android:id="@+id/btn_export"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/export"/>
+                android:text="@string/simpan"
+                android:layout_marginVertical="16dp"/>
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

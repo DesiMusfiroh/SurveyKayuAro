@@ -14,8 +14,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     init {
         surveyDao = surveyDb?.surveyDao()
     }
-    
-    val getAllSurveyData = surveyDao?.allSurveyData
 
     fun getSurveys(): LiveData<List<SurveyEntity>>? {
         return surveyDao?.getSurveys()

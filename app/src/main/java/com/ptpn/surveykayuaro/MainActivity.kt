@@ -3,7 +3,6 @@ package com.ptpn.surveykayuaro
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
@@ -12,6 +11,8 @@ import com.github.doyaaaaaken.kotlincsv.dsl.csvWriter
 import com.ptpn.surveykayuaro.data.SurveyEntity
 import com.ptpn.surveykayuaro.databinding.ActivityMainBinding
 import com.ptpn.surveykayuaro.form.FormActivity
+import com.ptpn.surveykayuaro.utils.generateFile
+import com.ptpn.surveykayuaro.utils.goToFileIntent
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityMainBinding
@@ -51,10 +52,43 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         val csvFile = generateFile(this, getCSVFileName())
         if (csvFile != null) {
             csvWriter().open(csvFile, append = false) {
-                writeRow(listOf("Id", "Nama Kedai", "Alamat Kedai", "Telepon Kedai", "Added Time"))
+                writeRow(listOf(
+                        "Id",
+                        "Nama Kedai",
+                        "Alamat Kedai",
+                        "Telepon Kedai",
+                        "Nama yang diinterview",
+                        "Posisi yang diinterview",
+                        "Berapa lama sudah berjualan ?",
+                        "Teh apa saja yang dijual ?",
+                        "Apa sudah kenal Teh Kayu Aro ?",
+                        "Teh apa yang paling laris di kedai/toko/grosir ini ?",
+                        "Berapa harga termurah teh yang dijual di kedai/toko/grosir ini ?",
+                        "Mau menjual Teh Kayu Aro ? Kita akan berikan promo dan sale.",
+                        "Jika tidak, kenapa ?",
+                        "Apa yang dapa kami bantu agar bapak/ibu dapat menjual Teh kayu Aro ?",
+                        "Nama Surveyor",
+                        "Masukan dan Saran",
+                        "Added Time"))
                 surveyList.forEachIndexed { index, survey ->
-                    writeRow(listOf(index, survey.namaKedai, survey.alamatKedai, survey.telpKedai, survey.addedTime))
-                    Log.d("Survey", "survey data === ${survey.alamatKedai}")
+                    writeRow(listOf(
+                            index + 1,
+                            survey.namaKedai,
+                            survey.alamatKedai,
+                            survey.telpKedai,
+                            survey.namaNarasumber,
+                            survey.posisiNarasumber,
+                            survey.lamaBerjualan,
+                            survey.tehDijual,
+                            survey.kenalTehkayuaro,
+                            survey.tehTerlaris,
+                            survey.hargaTermurah,
+                            survey.mauJualTehkayuaro,
+                            survey.jikaTidak,
+                            survey.bantuan,
+                            survey.namaSurveyor,
+                            survey.saran,
+                            survey.addedTime))
                 }
             }
 

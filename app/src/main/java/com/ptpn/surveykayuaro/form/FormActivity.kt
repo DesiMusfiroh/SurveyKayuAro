@@ -1,13 +1,13 @@
 package com.ptpn.surveykayuaro.form
 
-import android.Manifest
 import android.annotation.SuppressLint
-import android.content.pm.PackageManager
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import com.ptpn.surveykayuaro.MainActivity
+import com.ptpn.surveykayuaro.R
 import com.ptpn.surveykayuaro.data.SurveyEntity
 import com.ptpn.surveykayuaro.databinding.ActivityFormBinding
 import java.text.SimpleDateFormat
@@ -25,24 +25,51 @@ class FormActivity : AppCompatActivity() {
 
         binding.btnSave.setOnClickListener{
             saveDataSurvey()
+            Toast.makeText(this, getString(R.string.save_data_success), Toast.LENGTH_LONG).show()
+            startActivity(Intent(this, MainActivity::class.java))
         }
     }
 
     @SuppressLint("SimpleDateFormat")
     private fun saveDataSurvey() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
-        }
-
         val date = Calendar.getInstance().time
-        val datetimeFormat = SimpleDateFormat("yyyy-MM-dd hh:mm")
+        val datetimeFormat = SimpleDateFormat("yyyy/MM/dd hh:mm")
         val addedTime = datetimeFormat.format(date)
         val id = UUID.randomUUID().toString()
         binding.apply {
             val namakedai: String = tvNamaKedai.text.toString()
             val alamatKedai = tvAlamatKedai.text.toString()
             val telpKedai = tvTelpKedai.text.toString()
-            val survey = SurveyEntity(id, namakedai, alamatKedai, telpKedai, addedTime)
+            val namaNarasumber = tvNamaNarasumber.text.toString()
+            val posisiNarasumber = tvPosisiNarasumber.text.toString()
+            val lamaBerjualan = tvLamaBerjualan.text.toString()
+            val tehDijual = tvTehDijual.text.toString()
+            val kenalTehkayuaro = tvKenalTehkayuaro.text.toString()
+            val tehTerlaris = tvTehTerlaris.text.toString()
+            val hargaTermurah = tvHargaTermurah.text.toString()
+            val mauJualTehkayuaro = tvMauJualTehkayuaro.text.toString()
+            val jikaTidak = tvJikaTidak.text.toString()
+            val bantuan = tvBantuan.text.toString()
+            val namaSurveyor = tvNamaSurveyor.text.toString()
+            val saran = tvSaran.text.toString()
+            val survey = SurveyEntity(
+                    id,
+                    namakedai,
+                    alamatKedai,
+                    telpKedai,
+                    namaNarasumber,
+                    posisiNarasumber,
+                    lamaBerjualan,
+                    tehDijual,
+                    kenalTehkayuaro,
+                    tehTerlaris,
+                    hargaTermurah,
+                    mauJualTehkayuaro,
+                    jikaTidak,
+                    bantuan,
+                    namaSurveyor,
+                    saran,
+                    addedTime)
             viewModel.insert(survey)
         }
     }
