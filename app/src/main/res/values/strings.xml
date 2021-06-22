@@ -41,4 +41,6 @@
     <string name="save_data_success">Data Survey berhasil disimpan</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="take_picture">Ambil Photo</string>
+    <string name="title_image">Tambahkan Photo</string>
 </resources>
