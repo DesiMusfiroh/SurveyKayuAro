@@ -20,6 +20,7 @@ buildscript {
         archLifecycleVersion = '2.2.0'
         roomVersion = '2.3.0'
         roomRuntimeVersion = '2.3.0'
+        lottie_version = "3.4.1"
     }
     repositories {
         google()

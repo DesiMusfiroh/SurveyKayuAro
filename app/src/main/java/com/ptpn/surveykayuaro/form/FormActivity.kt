@@ -2,19 +2,26 @@ package com.ptpn.surveykayuaro.form
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
+import android.os.Handler
 import android.provider.MediaStore
 import android.view.View.VISIBLE
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModelProvider
+import com.airbnb.lottie.LottieAnimationView
 import com.ptpn.surveykayuaro.MainActivity
 import com.ptpn.surveykayuaro.R
 import com.ptpn.surveykayuaro.data.SurveyEntity
@@ -218,7 +225,32 @@ class FormActivity : AppCompatActivity() {
                     addedTime)
             viewModel.insert(survey)
         }
-        Toast.makeText(this, getString(R.string.save_data_success), Toast.LENGTH_LONG).show()
-        startActivity(Intent(this, MainActivity::class.java))
+        Handler().postDelayed({
+            showAlert(true, "Sukses!... \nData Survey \nberhasil ditambahkan!")
+            Toast.makeText(this, getString(R.string.save_data_success), Toast.LENGTH_LONG).show()
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        }, 5000)
+    }
+
+    private fun showAlert(check: Boolean, message: String) {
+        val dialog = Dialog(this)
+        dialog.setContentView(R.layout.dialog_alert)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        val tvMessage = dialog.findViewById(R.id.tv_message) as TextView
+        tvMessage.text = message
+
+        val btnClose = dialog.findViewById(R.id.iv_close) as ImageView
+        btnClose.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        val lottie = dialog.findViewById(R.id.lottie_dialog) as LottieAnimationView
+        if(check){
+            lottie.setAnimation("success.json")
+        }
+
+        dialog.show()
     }
 }
