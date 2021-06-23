@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.view.View.VISIBLE
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -22,7 +23,6 @@ import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.jar.Manifest
 
 @Suppress("DEPRECATION")
 class FormActivity : AppCompatActivity() {
@@ -30,20 +30,28 @@ class FormActivity : AppCompatActivity() {
     private lateinit var viewModel: FormViewModel
     private lateinit var photoPath: String
     private val REQUEST_TAKE_PHOTO = 1
+    private lateinit var addedTime: String
+    private lateinit var fileName: String
 
+    @SuppressLint("SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityFormBinding.inflate(layoutInflater)
         setContentView(binding.root)
         viewModel = ViewModelProvider(this).get(FormViewModel::class.java)
 
+        supportActionBar?.title = "Form Survey"
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
         if (ContextCompat.checkSelfPermission(applicationContext, android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED)
             ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.CAMERA), REQUEST_TAKE_PHOTO)
 
+        val date = Calendar.getInstance().time
+        val datetimeFormat = SimpleDateFormat("yyyy-MM-dd hh:mm")
+        addedTime = datetimeFormat.format(date)
+
         binding.btnSave.setOnClickListener{
             saveDataSurvey()
-            Toast.makeText(this, getString(R.string.save_data_success), Toast.LENGTH_LONG).show()
-            startActivity(Intent(this, MainActivity::class.java))
         }
 
         binding.btnTakePicture.setOnClickListener{
@@ -74,13 +82,15 @@ class FormActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_TAKE_PHOTO && resultCode == Activity.RESULT_OK) {
+            binding.picture.visibility = VISIBLE
             binding.picture.rotation = 90f
             binding.picture.setImageURI(Uri.parse(photoPath))
         }
     }
 
     private fun createImageFile(): File? {
-        val fileName = "NarasumberPicture"
+        val namaNarasumber = binding.tvNamaNarasumber.text.toString()
+        fileName = "$namaNarasumber - $addedTime"
         val storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         val image = File.createTempFile(
                 fileName,
@@ -93,9 +103,6 @@ class FormActivity : AppCompatActivity() {
 
     @SuppressLint("SimpleDateFormat")
     private fun saveDataSurvey() {
-        val date = Calendar.getInstance().time
-        val datetimeFormat = SimpleDateFormat("yyyy/MM/dd hh:mm")
-        val addedTime = datetimeFormat.format(date)
         val id = UUID.randomUUID().toString()
         binding.apply {
             val namakedai: String = tvNamaKedai.text.toString()
@@ -113,6 +120,83 @@ class FormActivity : AppCompatActivity() {
             val bantuan = tvBantuan.text.toString()
             val namaSurveyor = tvNamaSurveyor.text.toString()
             val saran = tvSaran.text.toString()
+
+            if (namakedai.isEmpty()) {
+                tvNamaKedai.error = "Mohon diisi terlebih dahulu!"
+                tvNamaKedai.requestFocus()
+                return
+            }
+            if (alamatKedai.isEmpty()) {
+                tvAlamatKedai.error = "Mohon diisi terlebih dahulu!"
+                tvAlamatKedai.requestFocus()
+                return
+            }
+            if (telpKedai.isEmpty()) {
+                tvTelpKedai.error = "Mohon diisi terlebih dahulu!"
+                tvTelpKedai.requestFocus()
+                return
+            }
+            if (namaNarasumber.isEmpty()) {
+                tvNamaNarasumber.error = "Mohon diisi terlebih dahulu!"
+                tvNamaNarasumber.requestFocus()
+                return
+            }
+            if (posisiNarasumber.isEmpty()) {
+                tvPosisiNarasumber.error = "Mohon diisi terlebih dahulu!"
+                tvPosisiNarasumber.requestFocus()
+                return
+            }
+            if (lamaBerjualan.isEmpty()) {
+                tvLamaBerjualan.error = "Mohon diisi terlebih dahulu!"
+                tvLamaBerjualan.requestFocus()
+                return
+            }
+            if (tehDijual.isEmpty()) {
+                tvTehDijual.error = "Mohon diisi terlebih dahulu!"
+                tvTehDijual.requestFocus()
+                return
+            }
+            if (kenalTehkayuaro.isEmpty()) {
+                tvKenalTehkayuaro.error = "Mohon diisi terlebih dahulu!"
+                tvKenalTehkayuaro.requestFocus()
+                return
+            }
+            if (tehTerlaris.isEmpty()) {
+                tvTehTerlaris.error = "Mohon diisi terlebih dahulu!"
+                tvTehTerlaris.requestFocus()
+                return
+            }
+            if (hargaTermurah.isEmpty()) {
+                tvHargaTermurah.error = "Mohon diisi terlebih dahulu!"
+                tvHargaTermurah.requestFocus()
+                return
+            }
+            if (mauJualTehkayuaro.isEmpty()) {
+                tvMauJualTehkayuaro.error = "Mohon diisi terlebih dahulu!"
+                tvMauJualTehkayuaro.requestFocus()
+                return
+            }
+            if (jikaTidak.isEmpty()) {
+                tvJikaTidak.error = "Mohon diisi terlebih dahulu!"
+                tvJikaTidak.requestFocus()
+                return
+            }
+            if (bantuan.isEmpty()) {
+                tvBantuan.error = "Mohon diisi terlebih dahulu!"
+                tvBantuan.requestFocus()
+                return
+            }
+            if (namaSurveyor.isEmpty()) {
+                tvNamaSurveyor.error = "Mohon diisi terlebih dahulu!"
+                tvNamaSurveyor.requestFocus()
+                return
+            }
+            if (saran.isEmpty()) {
+                tvSaran.error = "Mohon diisi terlebih dahulu!"
+                tvSaran.requestFocus()
+                return
+            }
+
             val survey = SurveyEntity(
                     id,
                     namakedai,
@@ -130,10 +214,11 @@ class FormActivity : AppCompatActivity() {
                     bantuan,
                     namaSurveyor,
                     saran,
+                    "$fileName.jpg",
                     addedTime)
             viewModel.insert(survey)
         }
+        Toast.makeText(this, getString(R.string.save_data_success), Toast.LENGTH_LONG).show()
+        startActivity(Intent(this, MainActivity::class.java))
     }
-
-
 }

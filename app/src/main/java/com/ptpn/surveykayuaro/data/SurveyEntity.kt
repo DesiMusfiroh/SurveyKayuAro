@@ -59,6 +59,9 @@ data class SurveyEntity (
     @ColumnInfo(name = "saran")
     val saran: String? = null,
 
+    @ColumnInfo(name = "image")
+    val image: String? = null,
+
     @ColumnInfo(name = "added_time")
     val addedTime: String? = null,
 ) : Parcelable

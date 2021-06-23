@@ -1,6 +1,7 @@
 package com.ptpn.surveykayuaro
 
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -23,6 +24,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.hide()
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
         viewModel.getSurveys()?.observe(this, Observer {surveys ->
@@ -69,6 +73,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                         "Apa yang dapa kami bantu agar bapak/ibu dapat menjual Teh kayu Aro ?",
                         "Nama Surveyor",
                         "Masukan dan Saran",
+                        "Image",
                         "Added Time"))
                 surveyList.forEachIndexed { index, survey ->
                     writeRow(listOf(
@@ -88,6 +93,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                             survey.bantuan,
                             survey.namaSurveyor,
                             survey.saran,
+                            survey.image,
                             survey.addedTime))
                 }
             }
@@ -99,5 +105,4 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             Toast.makeText(this, getString(R.string.csv_file_not_generated_text), Toast.LENGTH_LONG).show()
         }
     }
-
 }

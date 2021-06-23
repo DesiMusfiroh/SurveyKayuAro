@@ -10,6 +10,8 @@
     <color name="input">#F6F6F6</color>
 
     <color name="primary">#266745</color>
+    <color name="greenLight">#467801</color>
     <color name="secondary">#C9A865</color>
     <color name="secondaryDark">#A87C57</color>
+    <color name="transparent">#00EEEEEE</color>
 </resources>

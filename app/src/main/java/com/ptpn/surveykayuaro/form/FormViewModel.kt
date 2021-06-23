@@ -42,6 +42,7 @@ class FormViewModel(application: Application) : AndroidViewModel(application) {
                     survey.bantuan,
                     survey.namaSurveyor,
                     survey.saran,
+                    survey.image,
                     survey.addedTime
             )
             surveyDao?.insert(surveyEntity)
