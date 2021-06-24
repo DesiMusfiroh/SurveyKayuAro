@@ -64,6 +64,7 @@ class FormActivity : AppCompatActivity() {
         binding.btnTakePicture.setOnClickListener{
             takePicture()
         }
+        fileName = " "
     }
 
     @SuppressLint("QueryPermissionsNeeded")
@@ -230,7 +231,7 @@ class FormActivity : AppCompatActivity() {
             Toast.makeText(this, getString(R.string.save_data_success), Toast.LENGTH_LONG).show()
             startActivity(Intent(this, MainActivity::class.java))
             finish()
-        }, 5000)
+        }, 1000)
     }
 
     private fun showAlert(check: Boolean, message: String) {
