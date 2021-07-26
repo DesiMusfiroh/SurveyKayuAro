@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.github.doyaaaaaken.kotlincsv.dsl.csvWriter
-import com.ptpn.surveykayuaro.data.SurveyEntity
+import com.ptpn.surveykayuaro.data.source.local.entity.SurveyEntity
 import com.ptpn.surveykayuaro.databinding.ActivityMainBinding
 import com.ptpn.surveykayuaro.form.FormActivity
 import com.ptpn.surveykayuaro.utils.generateFile

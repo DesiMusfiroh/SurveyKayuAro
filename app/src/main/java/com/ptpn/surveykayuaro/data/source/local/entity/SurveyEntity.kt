@@ -1,4 +1,4 @@
-package com.ptpn.surveykayuaro.data
+package com.ptpn.surveykayuaro.data.source.local.entity
 
 import android.os.Parcelable
 import androidx.annotation.NonNull

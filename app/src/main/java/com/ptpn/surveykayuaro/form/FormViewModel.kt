@@ -2,9 +2,9 @@ package com.ptpn.surveykayuaro.form
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import com.ptpn.surveykayuaro.data.SurveyDao
-import com.ptpn.surveykayuaro.data.SurveyDatabase
-import com.ptpn.surveykayuaro.data.SurveyEntity
+import com.ptpn.surveykayuaro.data.source.local.room.SurveyDao
+import com.ptpn.surveykayuaro.data.source.local.room.SurveyDatabase
+import com.ptpn.surveykayuaro.data.source.local.entity.SurveyEntity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

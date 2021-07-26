@@ -24,7 +24,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.airbnb.lottie.LottieAnimationView
 import com.ptpn.surveykayuaro.MainActivity
 import com.ptpn.surveykayuaro.R
-import com.ptpn.surveykayuaro.data.SurveyEntity
+import com.ptpn.surveykayuaro.data.source.local.entity.SurveyEntity
 import com.ptpn.surveykayuaro.databinding.ActivityFormBinding
 import java.io.File
 import java.io.IOException

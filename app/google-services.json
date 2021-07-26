@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "471593049438",
+    "project_id": "surveykayuaro",
+    "storage_bucket": "surveykayuaro.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:471593049438:android:f833829632fa760b8103cf",
+        "android_client_info": {
+          "package_name": "com.ptpn.surveykayuaro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "471593049438-3pgbimdic09iuaeg072h63ug3snugdc2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDX4At4kjJFOxOedJLApz4GHQlG6KcnVVo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "471593049438-3pgbimdic09iuaeg072h63ug3snugdc2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
