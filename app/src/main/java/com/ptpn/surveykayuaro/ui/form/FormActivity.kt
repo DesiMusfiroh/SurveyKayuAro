@@ -223,7 +223,7 @@ class FormActivity : AppCompatActivity() {
                     bantuan,
                     namaSurveyor,
                     saran,
-                    "$fileName.jpg",
+                    imageUri.toString(),
                     addedTime)
             viewModel.insert(survey, imageUri)
         }

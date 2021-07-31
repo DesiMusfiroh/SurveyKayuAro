@@ -96,7 +96,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         if (csvFile != null) {
             csvWriter().open(csvFile, append = false) {
                 writeRow(listOf(
-                        "Id",
+                        "No",
                         "Nama Kedai",
                         "Alamat Kedai",
                         "Telepon Kedai",

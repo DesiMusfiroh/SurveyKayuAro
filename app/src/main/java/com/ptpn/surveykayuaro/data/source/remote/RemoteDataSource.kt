@@ -4,10 +4,13 @@ import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.android.gms.tasks.OnFailureListener
+import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
-import com.ptpn.surveykayuaro.data.source.remote.response.SurveyResponse
 import com.ptpn.surveykayuaro.data.source.local.entity.SurveyEntity
+import com.ptpn.surveykayuaro.data.source.remote.response.SurveyResponse
+
 
 class RemoteDataSource {
 
@@ -23,17 +26,19 @@ class RemoteDataSource {
     fun insertToFirebase(survey: SurveyEntity, imageUri: Uri) {
         val fileName = StringBuilder("${survey.namaNarasumber} - ${survey.addedTime}.jpg")
         val storageReference = FirebaseStorage.getInstance().getReference("images/$fileName")
-        storageReference.putFile(imageUri).addOnSuccessListener {
-            Log.d("firebase", "sukses upload image $it")
+        storageReference.putFile(imageUri).addOnSuccessListener {uploadTask ->
+            storageReference.downloadUrl.addOnSuccessListener { firebaseImageUri ->
+                survey.image = firebaseImageUri.toString()
+                database = FirebaseDatabase.getInstance().getReference("surveys")
+                database.child(survey.id).setValue(survey).addOnSuccessListener {
+                    Log.d(TAG, "insert data to firebase success")
+                }.addOnFailureListener {
+                    Log.d(TAG, "insert data to firebase failed : $it")
+                }
+            }
+            Log.d("firebase", "sukses upload image $uploadTask")
         }.addOnFailureListener {
             Log.d("firebase", "gagal upload image $it")
-        }
-
-        database = FirebaseDatabase.getInstance().getReference("surveys")
-        database.child(survey.id).setValue(survey).addOnSuccessListener {
-            Log.d(TAG, "insert data to firebase success")
-        }.addOnFailureListener {
-            Log.d(TAG, "insert data to firebase failed : $it")
         }
     }
 
@@ -63,7 +68,7 @@ class RemoteDataSource {
                                 survey?.bantuan,
                                 survey?.namaSurveyor,
                                 survey?.saran,
-                                "https://firebasestorage.googleapis.com/v0/b/surveykayuaro.appspot.com/o/images/${survey?.image}",
+                                survey?.image,
                                 survey?.addedTime
                         )
                         surveyList.add(surveyItem)
@@ -71,6 +76,7 @@ class RemoteDataSource {
                 }
                 surveyResults.postValue(surveyList)
             }
+
             override fun onCancelled(error: DatabaseError) {
                 Log.d("firebase", "failed to get survey data ${error.message}")
             }

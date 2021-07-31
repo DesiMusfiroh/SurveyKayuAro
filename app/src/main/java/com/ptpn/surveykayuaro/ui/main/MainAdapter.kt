@@ -1,11 +1,9 @@
 package com.ptpn.surveykayuaro.ui.main
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
-import com.ptpn.surveykayuaro.R
 import com.ptpn.surveykayuaro.data.source.local.entity.SurveyEntity
 import com.ptpn.surveykayuaro.databinding.ItemSurveysBinding
 
@@ -28,11 +26,9 @@ class MainAdapter(private var listSurvey: List<SurveyEntity>) : RecyclerView.Ada
                 tvItemSurveyor.text = survey.namaSurveyor
                 tvAlamatKedai.text = survey.alamatKedai
                 tvAddedTime.text = survey.addedTime
-                Glide.with(itemView.context)
-                        .load(survey.image)
-                        .apply(RequestOptions.placeholderOf(R.drawable.ic_loading)
-                                .error(R.drawable.ic_error))
-                        .into(imgItemImage)
+
+                val imageUri = Uri.parse(survey.image)
+                imgItemImage.setImageURI(imageUri)
             }
         }
     }
