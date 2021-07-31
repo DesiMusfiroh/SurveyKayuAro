@@ -11,15 +11,18 @@ abstract class SurveyDatabase: RoomDatabase() {
     abstract fun surveyDao(): SurveyDao
 
     companion object {
-        var INSTANCE : SurveyDatabase? = null
-        fun getDatabase(context: Context) : SurveyDatabase?  {
-            if (INSTANCE == null) {
-                synchronized(SurveyDatabase::class) {
-                    INSTANCE = Room.databaseBuilder(context.applicationContext,
-                            SurveyDatabase::class.java, "survey_database").build()
+        @Volatile
+        private var INSTANCE: SurveyDatabase? = null
+
+        fun getInstance(context: Context): SurveyDatabase =
+                INSTANCE ?: synchronized(this) {
+                    Room.databaseBuilder(
+                            context.applicationContext,
+                            SurveyDatabase::class.java,
+                            "survey_database.db"
+                    ).build().apply {
+                        INSTANCE = this
+                    }
                 }
-            }
-            return INSTANCE
-        }
     }
 }

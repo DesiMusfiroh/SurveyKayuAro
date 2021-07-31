@@ -47,4 +47,12 @@
     <string name="take_picture">Ambil Photo</string>
     <string name="title_image">Tambahkan Photo</string>
     <string name="message">Berhasil Menambahkan Data !</string>
+    <string name="data_survey">Data Survey</string>
+    <string name="search">Cari hasil survey ....</string>
+    <string name="added_time">Added time</string>
+    <string name="list">List All Survey</string>
+    <string name="choose_from_galery">Pilih Foto dari Galeri</string>
+    <string name="choose_date">Pilih Bulan</string>
+    <string name="list_note">Data Survey Keseluruhan </string>
+    <string name="list_desc">Silahkan klik tombol "Export to CSV" untuk mengexport seluruh data survey ke dalam format excel. </string>
 </resources>

@@ -5,6 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import com.ptpn.surveykayuaro.data.source.local.entity.SurveyEntity
+import com.ptpn.surveykayuaro.vo.Resource
 
 @Dao
 interface SurveyDao {

@@ -4,8 +4,8 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class SurveyResponse (
-    val id: String,
+data class SurveyResponse(
+    val id: String? = null,
     val namaKedai: String? = null,
     val alamatKedai: String? = null,
     val telpKedai: String? = null,
@@ -23,4 +23,4 @@ data class SurveyResponse (
     val saran: String? = null,
     val image: String? = null,
     val addedTime: String? = null,
-) : Parcelable
+) : Parcelable {}
