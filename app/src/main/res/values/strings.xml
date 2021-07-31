@@ -1,9 +1,7 @@
 <resources>
     <string name="app_name">Survey Pelanggan Teh Kayu Aro</string>
-    <string name="title">Survey Pelanggan
-        \nTeh Kayu Aro</string>
+    <string name="title">Survey Pelanggan \nTeh Kayu Aro</string>
 
-    <string name="title_survei">Form Survei</string>
     <string name="form_survey">Form Survey</string>
     <string name="csv_file_generated_text">CSV File berhasil dibuat</string>
     <string name="csv_file_not_generated_text">CSV File gagal dibuat</string>
@@ -44,10 +42,10 @@
     <string name="save_data_success">Data Survey berhasil disimpan</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="take_picture">Ambil Photo</string>
-    <string name="title_image">Tambahkan Photo</string>
+    <string name="take_picture">Ambil Foto</string>
+    <string name="title_image">Tambahkan Foto Pelanggan</string>
     <string name="message">Berhasil Menambahkan Data !</string>
-    <string name="data_survey">Data Survey</string>
+    <string name="data_survey">Data Survey Saya</string>
     <string name="search">Cari hasil survey ....</string>
     <string name="added_time">Added time</string>
     <string name="list">List All Survey</string>
@@ -55,4 +53,14 @@
     <string name="choose_date">Pilih Bulan</string>
     <string name="list_note">Data Survey Keseluruhan </string>
     <string name="list_desc">Silahkan klik tombol "Export to CSV" untuk mengexport seluruh data survey ke dalam format excel. </string>
+    <string name="data_null">Belum ada data survey yang anda masukkan ! \nSilahkan isi Form Survey !</string>
+    <string name="delete_survey">Hapus Survey</string>
+    <string name="delete_alert">Hapus data survey ini ?</string>
+    <string name="no">Tidak</string>
+    <string name="yes">Ya</string>
+    <string name="edit">Edit Data Survey</string>
+    <string name="dots"> : </string>
+    <string name="berjualan">Lama berjualan</string>
+    <string name="no_telp">Nomor Telepon</string>
+    <string name="masalah">Kendala dan masalah</string>
 </resources>

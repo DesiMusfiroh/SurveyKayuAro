@@ -16,4 +16,8 @@ class LocalDataSource private constructor(private val mSurveyDao: SurveyDao) {
 
     fun getSurveys(): LiveData<List<SurveyEntity>> = mSurveyDao.getSurveys()
     fun insertSurvey(survey: SurveyEntity) = mSurveyDao.insert(survey)
+    fun getSurvey(surveyId: String): LiveData<SurveyEntity> = mSurveyDao.getSurvey(surveyId)
+    suspend fun deleteSurvey(surveyId: String) {
+        mSurveyDao.deleteSurvey(surveyId)
+    }
 }

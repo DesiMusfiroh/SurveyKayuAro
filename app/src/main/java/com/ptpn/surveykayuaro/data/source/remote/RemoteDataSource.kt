@@ -4,8 +4,6 @@ import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.android.gms.tasks.OnFailureListener
-import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.ptpn.surveykayuaro.data.source.local.entity.SurveyEntity
@@ -36,9 +34,9 @@ class RemoteDataSource {
                     Log.d(TAG, "insert data to firebase failed : $it")
                 }
             }
-            Log.d("firebase", "sukses upload image $uploadTask")
+            Log.d(TAG, "sukses upload image $uploadTask")
         }.addOnFailureListener {
-            Log.d("firebase", "gagal upload image $it")
+            Log.d(TAG, "gagal upload image $it")
         }
     }
 
@@ -82,5 +80,14 @@ class RemoteDataSource {
             }
         })
         return surveyResults
+    }
+
+    fun deleteSurveyOnFirebase(surveyId: String) {
+        database = FirebaseDatabase.getInstance().getReference("surveys")
+        database.child(surveyId).removeValue().addOnSuccessListener {
+            Log.d(TAG, "delete data $surveyId success : $it")
+        }.addOnFailureListener {
+            Log.d(TAG, "delete data $surveyId failed failed : $it")
+        }
     }
 }

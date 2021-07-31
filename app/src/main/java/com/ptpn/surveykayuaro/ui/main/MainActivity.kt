@@ -10,6 +10,7 @@ import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.View.GONE
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -20,6 +21,8 @@ import com.github.doyaaaaaken.kotlincsv.dsl.csvWriter
 import com.ptpn.surveykayuaro.R
 import com.ptpn.surveykayuaro.data.source.local.entity.SurveyEntity
 import com.ptpn.surveykayuaro.databinding.ActivityMainBinding
+import com.ptpn.surveykayuaro.ui.detaillocal.DetailLocalActivity
+import com.ptpn.surveykayuaro.ui.detaillocal.DetailLocalActivity.Companion.EXTRA_SURVEY_ID
 import com.ptpn.surveykayuaro.ui.form.FormActivity
 import com.ptpn.surveykayuaro.ui.list.ListActivity
 import com.ptpn.surveykayuaro.utils.generateFile
@@ -48,13 +51,19 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         viewModel.getSurveys().observe(this, {surveys ->
             if (surveys != null) {
+                binding.surveyNull.visibility = GONE
                 surveyList = surveys
 
-                binding.rvSurveys.layoutManager = LinearLayoutManager(this)
+                binding.rvSurveys.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+                binding.rvSurveys.setHasFixedSize(true)
                 adapter = MainAdapter(surveyList)
                 binding.rvSurveys.adapter = adapter
                 adapter.setOnItemClickCallback(object : MainAdapter.OnItemClickCallback {
-                    override fun onItemClicked(data: SurveyEntity) {}
+                    override fun onItemClicked(data: SurveyEntity) {
+                        val detailIntent = Intent(this@MainActivity, DetailLocalActivity::class.java)
+                        detailIntent.putExtra(EXTRA_SURVEY_ID, data.id)
+                        startActivity(detailIntent)
+                    }
                 })
             }
         })

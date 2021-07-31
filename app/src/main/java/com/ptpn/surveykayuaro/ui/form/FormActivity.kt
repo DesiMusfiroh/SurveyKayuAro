@@ -180,11 +180,6 @@ class FormActivity : AppCompatActivity() {
                 tvNamaNarasumber.requestFocus()
                 return
             }
-            if (posisiNarasumber.isEmpty()) {
-                tvPosisiNarasumber.error = "Mohon diisi terlebih dahulu!"
-                tvPosisiNarasumber.requestFocus()
-                return
-            }
             if (kenalTehkayuaro.isEmpty()) {
                 tvKenalTehkayuaro.error = "Mohon diisi terlebih dahulu!"
                 tvKenalTehkayuaro.requestFocus()

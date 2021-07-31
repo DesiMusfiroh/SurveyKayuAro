@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ptpn.surveykayuaro.data.source.local.entity.SurveyEntity
-import com.ptpn.surveykayuaro.databinding.ItemSurveysBinding
+import com.ptpn.surveykayuaro.databinding.ItemSurveysLocalBinding
 
 class MainAdapter(private var listSurvey: List<SurveyEntity>) : RecyclerView.Adapter<MainAdapter.SurveyViewHolder>() {
     private lateinit var onItemClickCallback: OnItemClickCallback
@@ -18,14 +18,13 @@ class MainAdapter(private var listSurvey: List<SurveyEntity>) : RecyclerView.Ada
         this.onItemClickCallback = onItemClickCallback
     }
 
-    class SurveyViewHolder(private val binding: ItemSurveysBinding) : RecyclerView.ViewHolder(binding.root){
+    class SurveyViewHolder(private val binding: ItemSurveysLocalBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(survey: SurveyEntity) {
             with(binding) {
                 tvItemKedai.text = survey.namaKedai
                 tvItemNarasumber.text = survey.namaNarasumber
-                tvItemSurveyor.text = survey.namaSurveyor
-                tvAlamatKedai.text = survey.alamatKedai
-                tvAddedTime.text = survey.addedTime
+                tvItemAlamat.text = survey.alamatKedai
+                tvItemAddedTime.text = survey.addedTime
 
                 val imageUri = Uri.parse(survey.image)
                 imgItemImage.setImageURI(imageUri)
@@ -34,8 +33,8 @@ class MainAdapter(private var listSurvey: List<SurveyEntity>) : RecyclerView.Ada
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SurveyViewHolder {
-        val itemSurveysBinding = ItemSurveysBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return SurveyViewHolder(itemSurveysBinding)
+        val itemSurveysLocalBinding = ItemSurveysLocalBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return SurveyViewHolder(itemSurveysLocalBinding)
     }
 
     override fun onBindViewHolder(holder: SurveyViewHolder, position: Int) {

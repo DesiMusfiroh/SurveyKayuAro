@@ -21,9 +21,17 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.SurveiKayuAro">
-        <activity android:name=".ui.detail.DetailActivity" android:parentActivityName=".ui.list.ListActivity"/>
-        <activity android:name=".ui.list.ListActivity" android:parentActivityName=".ui.main.MainActivity" />
-        <activity android:name=".ui.form.FormActivity" android:parentActivityName=".ui.main.MainActivity"/>
+        <activity android:name=".ui.detaillocal.DetailLocalActivity"
+            android:parentActivityName=".ui.main.MainActivity"/>
+        <activity
+            android:name=".ui.detail.DetailActivity"
+            android:parentActivityName=".ui.list.ListActivity" />
+        <activity
+            android:name=".ui.list.ListActivity"
+            android:parentActivityName=".ui.main.MainActivity" />
+        <activity
+            android:name=".ui.form.FormActivity"
+            android:parentActivityName=".ui.main.MainActivity" />
         <activity android:name=".ui.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

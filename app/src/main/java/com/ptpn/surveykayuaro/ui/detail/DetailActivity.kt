@@ -1,8 +1,12 @@
 package com.ptpn.surveykayuaro.ui.detail
 
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.ptpn.surveykayuaro.R
 import com.ptpn.surveykayuaro.data.source.local.entity.SurveyEntity
 import com.ptpn.surveykayuaro.data.source.remote.response.SurveyResponse
 import com.ptpn.surveykayuaro.databinding.ActivityDetailBinding
@@ -33,7 +37,22 @@ class DetailActivity : AppCompatActivity() {
 
     private fun populateSurvey() {
         binding.apply {
-            tvNamaSurveyor.text = survey.namaSurveyor
+            tvNamaKedai.text = survey.namaKedai
+            tvAlamatKedai.text = survey.alamatKedai
+            tvNamaNarasumber.text = survey.namaNarasumber
+            tvPosisiNarasumber.text = survey.posisiNarasumber
+            tvLamaBerjualan.text = survey.lamaBerjualan
+            tvTelpKedai.text = survey.telpKedai
+            tvSaran.text = survey.saran
+            tvBantuan.text = survey.bantuan
+            tvJikaTidak.text = survey.jikaTidak
+
+            Glide.with(this@DetailActivity)
+                .load(survey.image)
+                .apply(
+                    RequestOptions.placeholderOf(R.drawable.ic_loading)
+                    .error(R.drawable.ic_error))
+                .into(imgImage)
         }
     }
 }

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:cardUseCompatPadding="true"
+    app:cardElevation="8dp"
+    app:cardCornerRadius="8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="250dp"
+        android:layout_height="200dp"
+        android:background="@color/placeholder">
+
+        <ImageView
+            android:id="@+id/img_item_image"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:contentDescription="@string/title_image"
+            android:scaleType="centerCrop"
+            android:src="@color/grey"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_added_time"
+            android:paddingVertical="4dp"
+            android:paddingHorizontal="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/img_item_image"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                style="@style/Text.Regular"
+                android:id="@+id/tv_item_added_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/added_time"/>
+        </FrameLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_item_image"
+            tools:layout_editor_absoluteX="16dp">
+
+            <TextView
+                style="@style/Text.Medium"
+                android:id="@+id/tv_item_kedai"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/nama_kedai"
+                android:maxLines="1"/>
+
+            <TextView
+                style="@style/Text.Regular"
+                android:id="@+id/tv_item_narasumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_sans"
+                android:text="@string/nama_narasumber"
+                android:maxLines="1"/>
+
+            <TextView
+                style="@style/Text.Regular"
+                android:id="@+id/tv_item_alamat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_sans"
+                android:text="@string/alamat_kedai"
+                android:maxLines="1"/>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

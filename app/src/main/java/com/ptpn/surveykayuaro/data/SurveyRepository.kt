@@ -38,6 +38,15 @@ class SurveyRepository private constructor(
         return remoteDataSource.getAllSurveysFromFirebase()
     }
 
+    fun getSurvey(surveyId: String) : LiveData<SurveyEntity> {
+        return localDataSource.getSurvey(surveyId)
+    }
+
+    suspend fun deleteSurvey(surveyId: String) {
+        localDataSource.deleteSurvey(surveyId)
+        remoteDataSource.deleteSurveyOnFirebase(surveyId)
+    }
+
 //    override fun getSurveys(): LiveData<Resource<List<SurveyEntity>>> {
 //        return object : NetworkBoundResource<List<SurveyEntity>, List<SurveyResponse>>(appExecutors) {
 //            public override fun loadFromDB(): LiveData<List<SurveyEntity>> =

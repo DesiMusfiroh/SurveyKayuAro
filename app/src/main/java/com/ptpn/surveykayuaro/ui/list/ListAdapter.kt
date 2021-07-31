@@ -79,9 +79,7 @@ class ListAdapter(private val listSurveys: List<SurveyResponse>, val context: Co
             }else{
                 val resultList = ArrayList<SurveyResponse>()
                 for (row in listSurveys) {
-                    if (row.namaKedai!!.toLowerCase(Locale.ROOT).contains(constraint.toString().toLowerCase(Locale.ROOT))
-
-                    ) {
+                    if (row.namaKedai!!.toLowerCase(Locale.ROOT).contains(constraint.toString().toLowerCase(Locale.ROOT))) {
                         resultList.add(row)
                     }
                 }
