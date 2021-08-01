@@ -16,4 +16,7 @@
     <color name="transparent">#00EEEEEE</color>
     <color name="placeholder">#E9F3DA</color>
     <color name="grey">#B5B4B2</color>
+
+    <color name="shimmer">#E7E7E7</color>
+    <color name="shimmerDark">#D5D5D5</color>
 </resources>
