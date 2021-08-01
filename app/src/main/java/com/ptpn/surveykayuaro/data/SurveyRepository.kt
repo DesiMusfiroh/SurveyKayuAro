@@ -32,22 +32,22 @@ class SurveyRepository private constructor(
         remoteDataSource.insertToFirebase(survey, imageUri)
     }
 
-    fun getSurveys(): LiveData<List<SurveyEntity>> = localDataSource.getSurveys()
+    override fun getSurveys(): LiveData<List<SurveyEntity>> = localDataSource.getSurveys()
 
-    fun getAllSurveys(): LiveData<ArrayList<SurveyResponse>> {
+    override fun getAllSurveys(): LiveData<ArrayList<SurveyResponse>> {
         return remoteDataSource.getAllSurveysFromFirebase()
     }
 
-    fun getSurvey(surveyId: String) : LiveData<SurveyEntity> {
+    override fun getSurvey(surveyId: String) : LiveData<SurveyEntity> {
         return localDataSource.getSurvey(surveyId)
     }
 
-    suspend fun deleteSurvey(surveyId: String, surveyImage: String) {
+    override suspend fun deleteSurvey(surveyId: String, surveyImage: String) {
         localDataSource.deleteSurvey(surveyId)
         remoteDataSource.deleteSurveyOnFirebase(surveyId, surveyImage)
     }
 
-    suspend fun updateSurvey(survey: SurveyEntity, imageUri: Uri) {
+    override suspend fun updateSurvey(survey: SurveyEntity, imageUri: Uri) {
         localDataSource.updateSurvey(survey)
         remoteDataSource.updateSurveyOnFirebase(survey, imageUri)
     }

@@ -20,10 +20,6 @@ class RemoteDataSource {
         private const val TAG = "RemoteDataSource"
     }
 
-    init {
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true)
-    }
-
     fun insertToFirebase(survey: SurveyEntity, imageUri: Uri) {
         val fileName = StringBuilder("${survey.namaNarasumber} - ${survey.addedTime}.jpg")
         val storageReference = FirebaseStorage.getInstance().getReference("images/$fileName")

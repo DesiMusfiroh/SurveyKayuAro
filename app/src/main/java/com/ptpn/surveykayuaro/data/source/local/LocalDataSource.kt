@@ -3,7 +3,6 @@ package com.ptpn.surveykayuaro.data.source.local
 import androidx.lifecycle.LiveData
 import com.ptpn.surveykayuaro.data.source.local.room.SurveyDao
 import com.ptpn.surveykayuaro.data.source.local.entity.SurveyEntity
-import com.ptpn.surveykayuaro.vo.Resource
 
 class LocalDataSource private constructor(private val mSurveyDao: SurveyDao) {
 

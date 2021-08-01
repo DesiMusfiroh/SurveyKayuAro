@@ -25,7 +25,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 @Suppress("DEPRECATION")
-@SuppressLint("QueryPermissionsNeeded", "SimpleDateFormat")
+@SuppressLint("QueryPermissionsNeeded")
 class FormActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFormBinding
     private lateinit var viewModel: FormViewModel
@@ -36,8 +36,8 @@ class FormActivity : AppCompatActivity() {
 
     companion object {
         private const val REQUEST_TAKE_PHOTO = 100
-        private const val REQUEST_CHOOSE_IMAGE = 200;
-        private const val PERMISSION_CODE = 1001;
+        private const val REQUEST_CHOOSE_IMAGE = 200
+        private const val PERMISSION_CODE = 1001
         const val EXTRA_RESULT = "extra_result_form"
         const val RESULT_CODE_FORM = 110
     }
@@ -57,7 +57,7 @@ class FormActivity : AppCompatActivity() {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), REQUEST_TAKE_PHOTO)
 
         val date = Calendar.getInstance().time
-        val datetimeFormat = SimpleDateFormat("dd-MM-yyyy hh:mm")
+        val datetimeFormat = SimpleDateFormat("dd-MM-yyyy hh:mm", Locale.getDefault())
         addedTime = datetimeFormat.format(date)
 
         binding.btnSave.setOnClickListener{ saveDataSurvey() }

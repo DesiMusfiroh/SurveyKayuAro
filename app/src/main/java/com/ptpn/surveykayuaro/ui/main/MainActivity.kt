@@ -18,6 +18,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.airbnb.lottie.LottieAnimationView
 import com.github.doyaaaaaken.kotlincsv.dsl.csvWriter
+import com.google.firebase.database.FirebaseDatabase
 import com.ptpn.surveykayuaro.R
 import com.ptpn.surveykayuaro.data.source.local.entity.SurveyEntity
 import com.ptpn.surveykayuaro.databinding.ActivityMainBinding
@@ -45,6 +46,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(binding.root)
         supportActionBar?.hide()
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true)
 
         val factory = ViewModelFactory.getInstance(this)
         viewModel = ViewModelProvider(this, factory)[MainViewModel::class.java]

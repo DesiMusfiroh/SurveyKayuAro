@@ -21,7 +21,6 @@ import com.ptpn.surveykayuaro.databinding.ActivityDetailLocalBinding
 import com.ptpn.surveykayuaro.ui.edit.EditActivity
 import com.ptpn.surveykayuaro.ui.edit.EditActivity.Companion.EXTRA_RESULT_UPDATE
 import com.ptpn.surveykayuaro.ui.edit.EditActivity.Companion.RESULT_CODE_FORM_UPDATE
-import com.ptpn.surveykayuaro.ui.form.FormActivity
 import com.ptpn.surveykayuaro.viewmodel.ViewModelFactory
 import java.lang.StringBuilder
 

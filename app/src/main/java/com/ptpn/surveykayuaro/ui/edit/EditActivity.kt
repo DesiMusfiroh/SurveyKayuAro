@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-import android.util.Log
 import android.view.View.VISIBLE
 import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModelProvider

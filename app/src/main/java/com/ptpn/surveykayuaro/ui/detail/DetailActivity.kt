@@ -1,13 +1,11 @@
 package com.ptpn.surveykayuaro.ui.detail
 
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.ptpn.surveykayuaro.R
-import com.ptpn.surveykayuaro.data.source.local.entity.SurveyEntity
 import com.ptpn.surveykayuaro.data.source.remote.response.SurveyResponse
 import com.ptpn.surveykayuaro.databinding.ActivityDetailBinding
 import com.ptpn.surveykayuaro.viewmodel.ViewModelFactory
