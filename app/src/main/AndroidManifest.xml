@@ -21,8 +21,10 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.SurveiKayuAro">
-        <activity android:name=".ui.detaillocal.DetailLocalActivity"
-            android:parentActivityName=".ui.main.MainActivity"/>
+        <activity android:name=".ui.edit.EditActivity"></activity>
+        <activity
+            android:name=".ui.detaillocal.DetailLocalActivity"
+            android:parentActivityName=".ui.main.MainActivity" />
         <activity
             android:name=".ui.detail.DetailActivity"
             android:parentActivityName=".ui.list.ListActivity" />

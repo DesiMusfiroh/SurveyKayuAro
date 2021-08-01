@@ -8,6 +8,7 @@ import com.ptpn.surveykayuaro.data.SurveyRepository
 import com.ptpn.surveykayuaro.di.Injection
 import com.ptpn.surveykayuaro.ui.detail.DetailViewModel
 import com.ptpn.surveykayuaro.ui.detaillocal.DetailLocalViewModel
+import com.ptpn.surveykayuaro.ui.edit.EditViewModel
 import com.ptpn.surveykayuaro.ui.form.FormViewModel
 import com.ptpn.surveykayuaro.ui.list.ListViewModel
 
@@ -41,6 +42,9 @@ class ViewModelFactory private constructor(private val mSurveyRepository: Survey
             }
             modelClass.isAssignableFrom(DetailLocalViewModel::class.java) -> {
                 DetailLocalViewModel(mSurveyRepository) as T
+            }
+            modelClass.isAssignableFrom(EditViewModel::class.java) -> {
+                EditViewModel(mSurveyRepository) as T
             }
             else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)
         }

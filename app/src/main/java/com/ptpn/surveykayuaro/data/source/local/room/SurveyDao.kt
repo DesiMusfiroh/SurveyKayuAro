@@ -1,12 +1,8 @@
 package com.ptpn.surveykayuaro.data.source.local.room
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import com.ptpn.surveykayuaro.data.source.local.entity.SurveyEntity
-import com.ptpn.surveykayuaro.vo.Resource
 
 @Dao
 interface SurveyDao {
@@ -21,4 +17,7 @@ interface SurveyDao {
 
     @Query("DELETE FROM data_survey WHERE id = :id")
     suspend fun deleteSurvey(id: String): Int
+
+    @Update
+    fun updateSurvey(survey: SurveyEntity)
 }

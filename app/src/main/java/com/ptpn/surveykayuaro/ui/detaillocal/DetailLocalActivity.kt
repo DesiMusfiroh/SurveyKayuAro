@@ -1,24 +1,41 @@
 package com.ptpn.surveykayuaro.ui.detaillocal
 
+import android.app.Dialog
+import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
+import com.airbnb.lottie.LottieAnimationView
 import com.ptpn.surveykayuaro.R
 import com.ptpn.surveykayuaro.data.source.local.entity.SurveyEntity
 import com.ptpn.surveykayuaro.databinding.ActivityDetailLocalBinding
+import com.ptpn.surveykayuaro.ui.edit.EditActivity
+import com.ptpn.surveykayuaro.ui.edit.EditActivity.Companion.RESULT_CODE_FORM_UPDATE
+import com.ptpn.surveykayuaro.ui.form.FormActivity
 import com.ptpn.surveykayuaro.viewmodel.ViewModelFactory
+import java.lang.StringBuilder
 
-class DetailLocalActivity : AppCompatActivity() {
+@Suppress("DEPRECATION")
+class DetailLocalActivity : AppCompatActivity(), View.OnClickListener {
     companion object {
         const val EXTRA_SURVEY_ID = "extra_survey_id"
+        private const val REQUEST_CODE_FORM_UPDATE = 100
     }
+
     private lateinit var binding: ActivityDetailLocalBinding
     private lateinit var viewModel: DetailLocalViewModel
     private lateinit var surveyId: String
+    private lateinit var surveyImage: String
+    private lateinit var survey: SurveyEntity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,12 +49,14 @@ class DetailLocalActivity : AppCompatActivity() {
         val factory = ViewModelFactory.getInstance(this)
         viewModel = ViewModelProvider(this, factory)[DetailLocalViewModel::class.java]
 
-        viewModel.getSurvey(surveyId).observe(this, { survey ->
-            if (survey != null) {
-                populateSurvey(survey)
+        viewModel.getSurvey(surveyId).observe(this, {
+            if (it != null) {
+                survey = it
+                surveyImage = "${survey.namaNarasumber} - ${survey.addedTime}.jpg"
+                populateSurvey(it)
             }
         })
-
+        binding.btnUpdate.setOnClickListener(this)
     }
 
     private fun populateSurvey(survey: SurveyEntity) {
@@ -69,7 +88,7 @@ class DetailLocalActivity : AppCompatActivity() {
                     setMessage(getString(R.string.delete_alert))
                     setNegativeButton(getString(R.string.no), null)
                     setPositiveButton(getString(R.string.yes)) { _, _ ->
-                        viewModel.deleteSurvey(surveyId)
+                        viewModel.deleteSurvey(surveyId, surveyImage)
                         finish()
                     }
                     show()
@@ -77,5 +96,47 @@ class DetailLocalActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CODE_FORM_UPDATE) {
+            if (resultCode == RESULT_CODE_FORM_UPDATE) {
+                val result = data?.getBooleanExtra(FormActivity.EXTRA_RESULT, false)
+                result?.let { showAlert(it) }
+            }
+        }
+    }
+
+    override fun onClick(v: View) {
+        when (v.id) {
+            R.id.btn_update -> {
+                val updateIntent = Intent(this@DetailLocalActivity, EditActivity::class.java)
+                updateIntent.putExtra(EditActivity.EXTRA_SURVEY_UPDATE, survey)
+                startActivityForResult(updateIntent, REQUEST_CODE_FORM_UPDATE)
+            }
+        }
+    }
+
+    private fun showAlert(check: Boolean) {
+        val dialog = Dialog(this)
+        dialog.setContentView(R.layout.dialog_alert)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        val tvMessage = dialog.findViewById(R.id.tv_message) as TextView
+
+        val btnClose = dialog.findViewById(R.id.iv_close) as ImageView
+        btnClose.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        val lottie = dialog.findViewById(R.id.lottie_dialog) as LottieAnimationView
+        if (check) {
+            lottie.setAnimation("success.json")
+            tvMessage.text = StringBuilder( "Sukses!... \nData Survey \nberhasil di update!")
+        } else {
+            lottie.setAnimation("failed.json")
+            tvMessage.text = StringBuilder("Gagal !!. \nData Survey \nbelum berhasil di update!")
+        }
+        dialog.show()
     }
 }

@@ -82,9 +82,15 @@ class RemoteDataSource {
         return surveyResults
     }
 
-    fun deleteSurveyOnFirebase(surveyId: String) {
+    fun deleteSurveyOnFirebase(surveyId: String, surveyImage: String) {
         database = FirebaseDatabase.getInstance().getReference("surveys")
         database.child(surveyId).removeValue().addOnSuccessListener {
+            val storageReference = FirebaseStorage.getInstance().getReference("images/$surveyImage")
+            storageReference.delete().addOnSuccessListener {
+                Log.d(TAG, "delete image $surveyImage success : $it")
+            }.addOnFailureListener {
+                Log.d(TAG, "delete image $surveyImage success : $it")
+            }
             Log.d(TAG, "delete data $surveyId success : $it")
         }.addOnFailureListener {
             Log.d(TAG, "delete data $surveyId failed failed : $it")

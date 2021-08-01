@@ -42,37 +42,12 @@ class SurveyRepository private constructor(
         return localDataSource.getSurvey(surveyId)
     }
 
-    suspend fun deleteSurvey(surveyId: String) {
+    suspend fun deleteSurvey(surveyId: String, surveyImage: String) {
         localDataSource.deleteSurvey(surveyId)
-        remoteDataSource.deleteSurveyOnFirebase(surveyId)
+        remoteDataSource.deleteSurveyOnFirebase(surveyId, surveyImage)
     }
 
-//    override fun getSurveys(): LiveData<Resource<List<SurveyEntity>>> {
-//        return object : NetworkBoundResource<List<SurveyEntity>, List<SurveyResponse>>(appExecutors) {
-//            public override fun loadFromDB(): LiveData<List<SurveyEntity>> =
-//                    localDataSource.getSurveys()
-//
-//            override fun shouldFetch(data: List<SurveyEntity>?): Boolean =
-//                    data == null || data.isEmpty()
-//
-//            public override fun createCall(): LiveData<ApiResponse<List<SurveyResponse>>> {
-//                throw NotImplementedError("Not yet implemented")
-//            }
-//
-//            public override fun saveCallResult(surveyResponse: List<SurveyResponse>) {
-//                val surveyList = ArrayList<SurveyEntity>()
-//                for (response in surveyResponse) {
-//                    val survey = SurveyEntity(response.id,
-//                            response.title,
-//                            response.description,
-//                            response.date,
-//                            false,
-//                            response.imagePath)
-//                    surveyList.add(survey)
-//                }
-//                localDataSource.insertSurvey(surveyList)
-//            }
-//        }.asLiveData()
-//    }
-
+    fun updateSurvey(survey: SurveyEntity, imageUri: Uri) {
+        localDataSource.updateSurvey(survey)
+    }
 }
