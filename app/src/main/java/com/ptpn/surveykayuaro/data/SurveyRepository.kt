@@ -47,7 +47,8 @@ class SurveyRepository private constructor(
         remoteDataSource.deleteSurveyOnFirebase(surveyId, surveyImage)
     }
 
-    fun updateSurvey(survey: SurveyEntity, imageUri: Uri) {
+    suspend fun updateSurvey(survey: SurveyEntity, imageUri: Uri) {
         localDataSource.updateSurvey(survey)
+        remoteDataSource.updateSurveyOnFirebase(survey, imageUri)
     }
 }

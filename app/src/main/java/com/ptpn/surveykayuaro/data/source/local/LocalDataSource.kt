@@ -22,7 +22,7 @@ class LocalDataSource private constructor(private val mSurveyDao: SurveyDao) {
         mSurveyDao.deleteSurvey(surveyId)
     }
 
-    fun updateSurvey(survey: SurveyEntity) {
+    suspend fun updateSurvey(survey: SurveyEntity) {
         mSurveyDao.updateSurvey(survey)
     }
 }

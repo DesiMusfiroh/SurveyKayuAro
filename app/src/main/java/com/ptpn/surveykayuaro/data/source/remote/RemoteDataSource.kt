@@ -9,7 +9,6 @@ import com.google.firebase.storage.FirebaseStorage
 import com.ptpn.surveykayuaro.data.source.local.entity.SurveyEntity
 import com.ptpn.surveykayuaro.data.source.remote.response.SurveyResponse
 
-
 class RemoteDataSource {
 
     private lateinit var database: DatabaseReference
@@ -21,10 +20,14 @@ class RemoteDataSource {
         private const val TAG = "RemoteDataSource"
     }
 
+    init {
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true)
+    }
+
     fun insertToFirebase(survey: SurveyEntity, imageUri: Uri) {
         val fileName = StringBuilder("${survey.namaNarasumber} - ${survey.addedTime}.jpg")
         val storageReference = FirebaseStorage.getInstance().getReference("images/$fileName")
-        storageReference.putFile(imageUri).addOnSuccessListener {uploadTask ->
+        storageReference.putFile(imageUri).addOnSuccessListener {uploadImage ->
             storageReference.downloadUrl.addOnSuccessListener { firebaseImageUri ->
                 survey.image = firebaseImageUri.toString()
                 database = FirebaseDatabase.getInstance().getReference("surveys")
@@ -34,7 +37,7 @@ class RemoteDataSource {
                     Log.d(TAG, "insert data to firebase failed : $it")
                 }
             }
-            Log.d(TAG, "sukses upload image $uploadTask")
+            Log.d(TAG, "sukses upload image $uploadImage")
         }.addOnFailureListener {
             Log.d(TAG, "gagal upload image $it")
         }
@@ -80,6 +83,26 @@ class RemoteDataSource {
             }
         })
         return surveyResults
+    }
+
+    fun updateSurveyOnFirebase(survey: SurveyEntity, imageUri: Uri) {
+        val fileName = StringBuilder("${survey.namaNarasumber} - ${survey.addedTime}.jpg")
+        val storageReference = FirebaseStorage.getInstance().getReference("images/$fileName")
+        storageReference.delete()
+        storageReference.putFile(imageUri).addOnSuccessListener { uploadImage ->
+            storageReference.downloadUrl.addOnSuccessListener { firebaseImageUri ->
+                survey.image = firebaseImageUri.toString()
+                database = FirebaseDatabase.getInstance().getReference("surveys")
+                database.child(survey.id).setValue(survey).addOnSuccessListener {
+                    Log.d(TAG, "update data to firebase success")
+                }.addOnFailureListener {
+                    Log.d(TAG, "update data to firebase failed : $it")
+                }
+            }
+            Log.d(TAG, "sukses upload image $uploadImage")
+        }.addOnFailureListener {
+            Log.d(TAG, "gagal upload image $it")
+        }
     }
 
     fun deleteSurveyOnFirebase(surveyId: String, surveyImage: String) {

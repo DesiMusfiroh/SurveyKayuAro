@@ -19,5 +19,5 @@ interface SurveyDao {
     suspend fun deleteSurvey(id: String): Int
 
     @Update
-    fun updateSurvey(survey: SurveyEntity)
+    suspend fun updateSurvey(survey: SurveyEntity)
 }

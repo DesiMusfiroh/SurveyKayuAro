@@ -19,6 +19,7 @@ import com.ptpn.surveykayuaro.R
 import com.ptpn.surveykayuaro.data.source.local.entity.SurveyEntity
 import com.ptpn.surveykayuaro.databinding.ActivityDetailLocalBinding
 import com.ptpn.surveykayuaro.ui.edit.EditActivity
+import com.ptpn.surveykayuaro.ui.edit.EditActivity.Companion.EXTRA_RESULT_UPDATE
 import com.ptpn.surveykayuaro.ui.edit.EditActivity.Companion.RESULT_CODE_FORM_UPDATE
 import com.ptpn.surveykayuaro.ui.form.FormActivity
 import com.ptpn.surveykayuaro.viewmodel.ViewModelFactory
@@ -102,7 +103,7 @@ class DetailLocalActivity : AppCompatActivity(), View.OnClickListener {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_CODE_FORM_UPDATE) {
             if (resultCode == RESULT_CODE_FORM_UPDATE) {
-                val result = data?.getBooleanExtra(FormActivity.EXTRA_RESULT, false)
+                val result = data?.getBooleanExtra(EXTRA_RESULT_UPDATE, false)
                 result?.let { showAlert(it) }
             }
         }

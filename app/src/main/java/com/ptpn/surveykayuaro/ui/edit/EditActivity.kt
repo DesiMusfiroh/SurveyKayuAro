@@ -11,13 +11,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-import android.view.View
+import android.util.Log
 import android.view.View.VISIBLE
 import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModelProvider
 import com.ptpn.surveykayuaro.data.source.local.entity.SurveyEntity
 import com.ptpn.surveykayuaro.databinding.ActivityEditBinding
-import com.ptpn.surveykayuaro.ui.form.FormActivity
 import com.ptpn.surveykayuaro.viewmodel.ViewModelFactory
 import java.io.File
 import java.io.IOException
@@ -28,11 +27,11 @@ import java.util.*
 @SuppressLint("QueryPermissionsNeeded")
 class EditActivity : AppCompatActivity() {
     companion object {
-        const val EXTRA_SURVEY_UPDATE = "extra_survey_id"
+        const val EXTRA_SURVEY_UPDATE = "extra_survey_update_id"
         private const val REQUEST_TAKE_PHOTO_UPDATE = 101
         private const val REQUEST_CHOOSE_IMAGE_UPDATE = 201
-        private const val PERMISSION_CODE = 1002;
-        const val EXTRA_RESULT_UPDATE = "extra_result_form"
+        private const val PERMISSION_CODE = 1002
+        const val EXTRA_RESULT_UPDATE = "extra_result_form_update"
         const val RESULT_CODE_FORM_UPDATE = 120
     }
 
@@ -72,10 +71,10 @@ class EditActivity : AppCompatActivity() {
             tvNamaSurveyor.setText(survey.namaSurveyor)
             tvTehDijual.setText(survey.tehDijual)
 
-            imageUri = Uri.parse(survey.image)
             picture.visibility = VISIBLE
-            picture.setImageURI(imageUri)
+            picture.setImageURI(Uri.parse(survey.image))
         }
+        imageUri = Uri.parse(survey.image)
 
         val date = Calendar.getInstance().time
         val datetimeFormat = SimpleDateFormat("dd-MM-yyyy hh:mm", Locale.getDefault())
@@ -123,7 +122,7 @@ class EditActivity : AppCompatActivity() {
     }
 
     private fun createImageFile(): File? {
-        newFileName = "${survey.namaNarasumber} - ${survey.addedTime} - $updateTime"
+        newFileName = "${survey.namaNarasumber} - ${survey.addedTime}"
         val storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         val image = File.createTempFile(
             newFileName,
@@ -141,9 +140,9 @@ class EditActivity : AppCompatActivity() {
                 binding.picture.visibility = VISIBLE
                 binding.picture.setImageURI(imageUri)
             }
+
             if (requestCode == REQUEST_CHOOSE_IMAGE_UPDATE) {
                 imageUri = data?.data!!
-                newFileName = "${survey.namaNarasumber} - ${survey.addedTime} - $updateTime"
                 binding.picture.visibility = VISIBLE
                 binding.picture.setImageURI(imageUri)
             }
