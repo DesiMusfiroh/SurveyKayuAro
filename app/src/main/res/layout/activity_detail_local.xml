@@ -182,6 +182,36 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
+                android:text="@string/title_kenal_tehkayuaro" />
+
+            <TextView
+                style="@style/Text.Medium"
+                android:id="@+id/tv_kenal_tehkayuaro"
+                android:text="@string/kenal_tehkayuaro"
+                android:layout_marginHorizontal="20dp"/>
+
+            <TextView
+                style="@style/Text.Medium"
+                android:fontFamily="@font/poppins_semibold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/mau_jual" />
+
+            <TextView
+                style="@style/Text.Medium"
+                android:id="@+id/tv_mau_jual_tehkayuaro"
+                android:text="@string/mau_jual_tehkayuaro"
+                android:layout_marginHorizontal="20dp"/>
+
+            <TextView
+                style="@style/Text.Medium"
+                android:fontFamily="@font/poppins_semibold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
                 android:text="@string/masalah" />
 
             <TextView

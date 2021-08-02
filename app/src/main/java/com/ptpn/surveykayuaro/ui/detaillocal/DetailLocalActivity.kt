@@ -70,6 +70,8 @@ class DetailLocalActivity : AppCompatActivity(), View.OnClickListener {
             tvSaran.text = survey.saran
             tvBantuan.text = survey.bantuan
             tvJikaTidak.text = survey.jikaTidak
+            tvMauJualTehkayuaro.text = survey.mauJualTehkayuaro
+            tvKenalTehkayuaro.text = survey.kenalTehkayuaro
 
             val imageUri = Uri.parse(survey.image)
             imgImage.setImageURI(imageUri)

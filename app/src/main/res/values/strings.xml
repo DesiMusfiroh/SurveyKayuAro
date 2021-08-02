@@ -48,7 +48,7 @@
     <string name="data_survey">Data Survey Saya</string>
     <string name="search">Cari hasil survey ....</string>
     <string name="added_time">Added time</string>
-    <string name="list">List All Survey</string>
+    <string name="list">List Data Survey</string>
     <string name="choose_from_galery">Pilih Foto dari Galeri</string>
     <string name="choose_date">Pilih Bulan</string>
     <string name="list_note">Data Survey Keseluruhan </string>
@@ -65,4 +65,17 @@
     <string name="masalah">Kendala dan masalah</string>
     <string name="simpan_perubahan">Simpan Perubahan</string>
     <string name="kayu_aro">Teh Kayu Aro</string>
+    <string name="rekap">Rekapitulasi Hasil Survey</string>
+    <string name="jumlah_survey">Jumlah Responden Survey</string>
+    <string name="brand">Brand Teh Kayu Aro</string>
+    <string name="mau_jual">Mau menjual Teh Kayu Aro ?</string>
+    <string name="kenal">Kenal</string>
+    <string name="responden">98 Responden</string>
+    <string name="belum_kenal">Belum Kenal</string>
+    <string name="jumlah_kenal">64</string>
+    <string name="jumlah_belum_kenal">34</string>
+    <string name="jumlah_mau_jual">44</string>
+    <string name="tidak_mau">Tidak Mau Jual</string>
+    <string name="jumlah_tidak_mau_jual">54</string>
+    <string name="mau">Mau Menjual</string>
 </resources>
