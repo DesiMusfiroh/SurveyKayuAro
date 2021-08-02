@@ -21,7 +21,14 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.SurveiKayuAro">
-        <activity android:name=".ui.edit.EditActivity"></activity>
+        <activity android:name=".ui.splash.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.edit.EditActivity" />
         <activity
             android:name=".ui.detaillocal.DetailLocalActivity"
             android:parentActivityName=".ui.main.MainActivity" />
@@ -34,13 +41,7 @@
         <activity
             android:name=".ui.form.FormActivity"
             android:parentActivityName=".ui.main.MainActivity" />
-        <activity android:name=".ui.main.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".ui.main.MainActivity"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"

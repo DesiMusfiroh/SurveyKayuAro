@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.ptpn.surveykayuaro.ui.form
 
 import android.Manifest
@@ -5,13 +7,13 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.view.View.VISIBLE
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
@@ -23,16 +25,16 @@ import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
+import android.net.Uri as Uri1
 
-@Suppress("DEPRECATION")
-@SuppressLint("QueryPermissionsNeeded")
 class FormActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFormBinding
     private lateinit var viewModel: FormViewModel
     private lateinit var photoPath: String
     private lateinit var addedTime: String
     private lateinit var fileName: String
-    private lateinit var imageUri: Uri
+    private lateinit var imageUri: Uri1
+    private lateinit var photoFile: File
 
     companion object {
         private const val REQUEST_TAKE_PHOTO = 100
@@ -42,7 +44,6 @@ class FormActivity : AppCompatActivity() {
         const val RESULT_CODE_FORM = 110
     }
 
-    @SuppressLint("SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityFormBinding.inflate(layoutInflater)
@@ -64,6 +65,7 @@ class FormActivity : AppCompatActivity() {
         binding.btnTakePicture.setOnClickListener{ takePicture() }
         binding.btnChoosePhoto.setOnClickListener { choosePhoto() }
         fileName = " "
+        photoPath = " "
     }
 
     private fun choosePhoto() {
@@ -83,26 +85,39 @@ class FormActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("QueryPermissionsNeeded")
     private fun takePicture() {
-        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        if(intent.resolveActivity(packageManager) != null) {
-            var photoFile: File? = null
-            try {
-                photoFile = createImageFile()
-            } catch (e: IOException) {}
-            if (photoFile != null) {
-                imageUri = FileProvider.getUriForFile(
-                        this,
-                        "com.ptpn.surveykayuaro.fileprovider",
-                        photoFile,
-                )
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
-                startActivityForResult(intent, REQUEST_TAKE_PHOTO)
-            }
+
+//        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+//        if(intent.resolveActivity(packageManager) != null) {
+//            var photoFile: File? = null
+//            try {
+//                photoFile = createImageFile()
+//            } catch (e: IOException) {}
+//            if (photoFile != null) {
+//                imageUri = FileProvider.getUriForFile(
+//                        this,
+//                        "com.ptpn.surveykayuaro.fileprovider",
+//                        photoFile,
+//                )
+//                intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
+//                startActivityForResult(intent, REQUEST_TAKE_PHOTO)
+//            }
+//        }
+
+        val takePhotoIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        photoFile = createImageFile()
+        imageUri = FileProvider.getUriForFile(this, "com.ptpn.surveykayuaro.fileprovider", photoFile)
+
+        takePhotoIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
+        if (takePhotoIntent.resolveActivity(this.packageManager) != null){
+            startActivityForResult(takePhotoIntent, REQUEST_TAKE_PHOTO)
+        } else {
+            Toast.makeText(this,"Tidak dapat membuka kamera!", Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun createImageFile(): File? {
+    private fun createImageFile(): File {
         val namaNarasumber = binding.tvNamaNarasumber.text.toString()
         fileName = "$namaNarasumber - $addedTime"
         val storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
@@ -119,6 +134,7 @@ class FormActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == REQUEST_TAKE_PHOTO) {
+                imageUri = Uri1.parse(photoPath)
                 binding.picture.visibility = VISIBLE
                 binding.picture.setImageURI(imageUri)
             }

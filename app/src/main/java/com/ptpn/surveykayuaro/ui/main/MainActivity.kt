@@ -178,4 +178,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
         dialog.show()
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finishAffinity()
+    }
 }
