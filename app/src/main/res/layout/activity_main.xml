@@ -155,6 +155,7 @@
             android:backgroundTint="@color/placeholder">
             <TextView
                 style="@style/Text.Medium"
+                android:id="@+id/tv_total_survey"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:layout_width="match_parent"
@@ -208,6 +209,7 @@
 
                     <TextView
                         style="@style/Text.Medium"
+                        android:id="@+id/tv_sudah_kenal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -246,6 +248,7 @@
 
                     <TextView
                         style="@style/Text.Medium"
+                        android:id="@+id/tv_belum_kenal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -302,6 +305,7 @@
 
                     <TextView
                         style="@style/Text.Medium"
+                        android:id="@+id/tv_mau_menjual"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -340,6 +344,7 @@
 
                     <TextView
                         style="@style/Text.Medium"
+                        android:id="@+id/tv_tidak_mau_menjual"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"

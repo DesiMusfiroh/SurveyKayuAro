@@ -8,6 +8,7 @@ import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.ptpn.surveykayuaro.data.source.local.entity.SurveyEntity
 import com.ptpn.surveykayuaro.data.source.remote.response.SurveyResponse
+import com.ptpn.surveykayuaro.data.source.remote.response.TotalSurveyResponse
 
 class RemoteDataSource {
 
@@ -37,6 +38,43 @@ class RemoteDataSource {
         }.addOnFailureListener {
             Log.d(TAG, "gagal upload image $it")
         }
+    }
+
+    fun getTotalSurvey() : LiveData<TotalSurveyResponse>{
+        val response = MutableLiveData<TotalSurveyResponse>()
+        database = FirebaseDatabase.getInstance().getReference("surveys")
+        var totalMauJual: Int = 0
+        var totalTidakMauJual: Int = 0
+        var totalSudahKenal: Int = 0
+        var totalBelumKenal: Int = 0
+        database.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (surveySnapshot in snapshot.children) {
+                    val survey = surveySnapshot.getValue(SurveyResponse::class.java)
+                    if (survey?.mauJualTehkayuaro == "iya") {
+                        totalMauJual += 1
+                    }
+                    if (survey?.kenalTehkayuaro == "sudah") {
+                        totalSudahKenal += 1
+                    }
+                }
+                totalTidakMauJual =  snapshot.children.count() - totalMauJual
+                totalBelumKenal = snapshot.children.count() - totalSudahKenal
+                val totalSurveyResponse = TotalSurveyResponse(
+                        snapshot.children.count(),
+                        totalMauJual,
+                        totalTidakMauJual,
+                        totalSudahKenal,
+                        totalBelumKenal
+                )
+                response.postValue(totalSurveyResponse)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.d("firebase", "failed to get total survey ${error.message}")
+            }
+        })
+        return response
     }
 
     fun getAllSurveysFromFirebase() : LiveData<ArrayList<SurveyResponse>> {

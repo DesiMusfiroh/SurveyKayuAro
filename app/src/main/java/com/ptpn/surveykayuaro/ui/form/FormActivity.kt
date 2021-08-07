@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View.VISIBLE
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
@@ -134,9 +135,9 @@ class FormActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == REQUEST_TAKE_PHOTO) {
-                imageUri = Uri1.parse(photoPath)
                 binding.picture.visibility = VISIBLE
-                binding.picture.setImageURI(imageUri)
+//                Log.d("form", "image uri = $imageUri")
+//                binding.picture.setImageURI(imageUri)
             }
             if (requestCode == REQUEST_CHOOSE_IMAGE) {
                 imageUri = data?.data!!
@@ -151,6 +152,10 @@ class FormActivity : AppCompatActivity() {
     private fun saveDataSurvey() {
         val id = UUID.randomUUID().toString()
         binding.apply {
+
+            val checkedRbKenalTehKayuAro = rgKenalTehkayuaro.checkedRadioButtonId
+            val checkedRbMauJualTeh = rgMauJualTehkayuaro.checkedRadioButtonId
+
             val namakedai: String = tvNamaKedai.text.toString()
             val alamatKedai = tvAlamatKedai.text.toString()
             val telpKedai = tvTelpKedai.text.toString()
@@ -158,14 +163,14 @@ class FormActivity : AppCompatActivity() {
             val posisiNarasumber = tvPosisiNarasumber.text.toString()
             val lamaBerjualan = tvLamaBerjualan.text.toString()
             val tehDijual = tvTehDijual.text.toString()
-            val kenalTehkayuaro = tvKenalTehkayuaro.text.toString()
             val tehTerlaris = tvTehTerlaris.text.toString()
             val hargaTermurah = tvHargaTermurah.text.toString()
-            val mauJualTehkayuaro = tvMauJualTehkayuaro.text.toString()
             val jikaTidak = tvJikaTidak.text.toString()
             val bantuan = tvBantuan.text.toString()
             val namaSurveyor = tvNamaSurveyor.text.toString()
             val saran = tvSaran.text.toString()
+            val kenalTehKayuAro = resources.getResourceEntryName(checkedRbKenalTehKayuAro)
+            val mauJualTehKayuAro = resources.getResourceEntryName(checkedRbMauJualTeh)
 
             if (namakedai.isEmpty()) {
                 tvNamaKedai.error = "Mohon diisi terlebih dahulu!"
@@ -180,16 +185,6 @@ class FormActivity : AppCompatActivity() {
             if (namaNarasumber.isEmpty()) {
                 tvNamaNarasumber.error = "Mohon diisi terlebih dahulu!"
                 tvNamaNarasumber.requestFocus()
-                return
-            }
-            if (kenalTehkayuaro.isEmpty()) {
-                tvKenalTehkayuaro.error = "Mohon diisi terlebih dahulu!"
-                tvKenalTehkayuaro.requestFocus()
-                return
-            }
-            if (mauJualTehkayuaro.isEmpty()) {
-                tvMauJualTehkayuaro.error = "Mohon diisi terlebih dahulu!"
-                tvMauJualTehkayuaro.requestFocus()
                 return
             }
             if (namaSurveyor.isEmpty()) {
@@ -212,10 +207,10 @@ class FormActivity : AppCompatActivity() {
                     posisiNarasumber,
                     lamaBerjualan,
                     tehDijual,
-                    kenalTehkayuaro,
+                    kenalTehKayuAro,
                     tehTerlaris,
                     hargaTermurah,
-                    mauJualTehkayuaro,
+                    mauJualTehKayuAro,
                     jikaTidak,
                     bantuan,
                     namaSurveyor,

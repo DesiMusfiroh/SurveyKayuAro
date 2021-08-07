@@ -70,7 +70,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 })
             }
         })
-
+        viewModel.totalSurvey().observe(this, {
+            binding.tvTotalSurvey.text = it.totalSurvey.toString()
+            binding.tvMauMenjual.text = it.totalMauJual.toString()
+            binding.tvTidakMauMenjual.text = it.totalTidakMauJual.toString()
+            binding.tvSudahKenal.text = it.totalSudahKenal.toString()
+            binding.tvBelumKenal.text = it.totalBelumKenal.toString()
+        })
         binding.btnForm.setOnClickListener(this)
         binding.btnExport.setOnClickListener(this)
         binding.btnList.setOnClickListener(this)
@@ -183,4 +189,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         super.onBackPressed()
         finishAffinity()
     }
+
+
 }

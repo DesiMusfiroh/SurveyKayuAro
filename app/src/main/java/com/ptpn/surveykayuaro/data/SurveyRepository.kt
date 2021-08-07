@@ -6,6 +6,7 @@ import com.ptpn.surveykayuaro.data.source.local.LocalDataSource
 import com.ptpn.surveykayuaro.data.source.local.entity.SurveyEntity
 import com.ptpn.surveykayuaro.data.source.remote.RemoteDataSource
 import com.ptpn.surveykayuaro.data.source.remote.response.SurveyResponse
+import com.ptpn.surveykayuaro.data.source.remote.response.TotalSurveyResponse
 import com.ptpn.surveykayuaro.utils.AppExecutors
 
 class SurveyRepository private constructor(
@@ -51,4 +52,6 @@ class SurveyRepository private constructor(
         localDataSource.updateSurvey(survey)
         remoteDataSource.updateSurveyOnFirebase(survey, imageUri)
     }
+
+    fun totalSurvey() : LiveData<TotalSurveyResponse> = remoteDataSource.getTotalSurvey()
 }

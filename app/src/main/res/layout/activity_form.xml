@@ -143,13 +143,26 @@
                 android:layout_marginBottom="8dp"
                 android:text="@string/title_kenal_tehkayuaro" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tv_kenal_tehkayuaro"
+            <RadioGroup
+                android:id="@+id/rg_kenal_tehkayuaro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_input"
-                android:hint="@string/kenal_tehkayuaro"
-                android:padding="16dp" />
+                android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/sudah"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:textSize="14sp"
+                    android:text="@string/sudah_kenal"/>
+                <RadioButton
+                    android:id="@+id/belum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:textSize="14sp"
+                    android:text="@string/belum_kenal"/>
+            </RadioGroup>
 
             <TextView
                 style="@style/Text.Medium"
@@ -192,13 +205,26 @@
                 android:layout_marginBottom="8dp"
                 android:text="@string/title_mau_jual_tehkayuaro" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tv_mau_jual_tehkayuaro"
+            <RadioGroup
+                android:id="@+id/rg_mau_jual_tehkayuaro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_input"
-                android:hint="@string/mau_jual_tehkayuaro"
-                android:padding="16dp" />
+                android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/iya"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:textSize="14sp"
+                    android:text="@string/mau"/>
+                <RadioButton
+                    android:id="@+id/tidak"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:textSize="14sp"
+                    android:text="@string/tidak_mau"/>
+            </RadioGroup>
 
             <TextView
                 style="@style/Text.Medium"
