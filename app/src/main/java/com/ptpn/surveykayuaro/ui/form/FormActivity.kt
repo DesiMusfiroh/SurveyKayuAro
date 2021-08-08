@@ -12,9 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-import android.util.Log
 import android.view.View.VISIBLE
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
@@ -26,7 +24,7 @@ import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
-import android.net.Uri as Uri1
+import android.net.Uri
 
 class FormActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFormBinding
@@ -34,13 +32,16 @@ class FormActivity : AppCompatActivity() {
     private lateinit var photoPath: String
     private lateinit var addedTime: String
     private lateinit var fileName: String
-    private lateinit var imageUri: Uri1
-    private lateinit var photoFile: File
+    private lateinit var imageUri: Uri
+    private var checkedRbKenalTehKayuAro = 0
+    private var checkedRbMauJualTeh = 0
+    private var kenalTehKayuAro = "belum"
+    private var mauJualTehKayuAro = "iya"
+    private val REQUEST_TAKE_PHOTO = 100
+    private val REQUEST_CHOOSE_IMAGE = 200
+    private val PERMISSION_CODE = 1001
 
     companion object {
-        private const val REQUEST_TAKE_PHOTO = 100
-        private const val REQUEST_CHOOSE_IMAGE = 200
-        private const val PERMISSION_CODE = 1001
         const val EXTRA_RESULT = "extra_result_form"
         const val RESULT_CODE_FORM = 110
     }
@@ -66,7 +67,17 @@ class FormActivity : AppCompatActivity() {
         binding.btnTakePicture.setOnClickListener{ takePicture() }
         binding.btnChoosePhoto.setOnClickListener { choosePhoto() }
         fileName = " "
-        photoPath = " "
+
+        binding.apply {
+            if (rgKenalTehkayuaro.isClickable) {
+                checkedRbKenalTehKayuAro = rgKenalTehkayuaro.checkedRadioButtonId
+                kenalTehKayuAro = resources.getResourceEntryName(checkedRbKenalTehKayuAro)
+            }
+            if (rgMauJualTehkayuaro.isClickable) {
+                checkedRbMauJualTeh = rgMauJualTehkayuaro.checkedRadioButtonId
+                mauJualTehKayuAro = resources.getResourceEntryName(checkedRbMauJualTeh)
+            }
+        }
     }
 
     private fun choosePhoto() {
@@ -88,47 +99,28 @@ class FormActivity : AppCompatActivity() {
 
     @SuppressLint("QueryPermissionsNeeded")
     private fun takePicture() {
-
-//        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-//        if(intent.resolveActivity(packageManager) != null) {
-//            var photoFile: File? = null
-//            try {
-//                photoFile = createImageFile()
-//            } catch (e: IOException) {}
-//            if (photoFile != null) {
-//                imageUri = FileProvider.getUriForFile(
-//                        this,
-//                        "com.ptpn.surveykayuaro.fileprovider",
-//                        photoFile,
-//                )
-//                intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
-//                startActivityForResult(intent, REQUEST_TAKE_PHOTO)
-//            }
-//        }
-
-        val takePhotoIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        photoFile = createImageFile()
-        imageUri = FileProvider.getUriForFile(this, "com.ptpn.surveykayuaro.fileprovider", photoFile)
-
-        takePhotoIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
-        if (takePhotoIntent.resolveActivity(this.packageManager) != null){
-            startActivityForResult(takePhotoIntent, REQUEST_TAKE_PHOTO)
-        } else {
-            Toast.makeText(this,"Tidak dapat membuka kamera!", Toast.LENGTH_SHORT).show()
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        if(intent.resolveActivity(packageManager) != null) {
+            val photoFile: File? = try {
+                createImageFile()
+            } catch (e: IOException) {
+                null
+            }
+            photoFile?.also {
+                imageUri  = FileProvider.getUriForFile(this, "com.ptpn.surveykayuaro.fileprovider", it)
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
+                startActivityForResult(intent, REQUEST_TAKE_PHOTO)
+            }
         }
     }
 
-    private fun createImageFile(): File {
+    private fun createImageFile(): File? {
         val namaNarasumber = binding.tvNamaNarasumber.text.toString()
         fileName = "$namaNarasumber - $addedTime"
         val storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-        val image = File.createTempFile(
-                fileName,
-                ".jpg",
-                storageDir
-        )
-        photoPath = image.absolutePath
-        return image
+        return File.createTempFile(fileName, ".jpg", storageDir).apply {
+            photoPath = absolutePath
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -136,8 +128,7 @@ class FormActivity : AppCompatActivity() {
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == REQUEST_TAKE_PHOTO) {
                 binding.picture.visibility = VISIBLE
-//                Log.d("form", "image uri = $imageUri")
-//                binding.picture.setImageURI(imageUri)
+                binding.picture.setImageURI(imageUri)
             }
             if (requestCode == REQUEST_CHOOSE_IMAGE) {
                 imageUri = data?.data!!
@@ -153,9 +144,6 @@ class FormActivity : AppCompatActivity() {
         val id = UUID.randomUUID().toString()
         binding.apply {
 
-            val checkedRbKenalTehKayuAro = rgKenalTehkayuaro.checkedRadioButtonId
-            val checkedRbMauJualTeh = rgMauJualTehkayuaro.checkedRadioButtonId
-
             val namakedai: String = tvNamaKedai.text.toString()
             val alamatKedai = tvAlamatKedai.text.toString()
             val telpKedai = tvTelpKedai.text.toString()
@@ -169,8 +157,6 @@ class FormActivity : AppCompatActivity() {
             val bantuan = tvBantuan.text.toString()
             val namaSurveyor = tvNamaSurveyor.text.toString()
             val saran = tvSaran.text.toString()
-            val kenalTehKayuAro = resources.getResourceEntryName(checkedRbKenalTehKayuAro)
-            val mauJualTehKayuAro = resources.getResourceEntryName(checkedRbMauJualTeh)
 
             if (namakedai.isEmpty()) {
                 tvNamaKedai.error = "Mohon diisi terlebih dahulu!"

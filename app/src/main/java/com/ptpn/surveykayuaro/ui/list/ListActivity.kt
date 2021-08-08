@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
@@ -27,6 +28,9 @@ class ListActivity : AppCompatActivity(), DatePickerFragment.DialogDateListener,
     private lateinit var viewModel: ListViewModel
     private lateinit var surveyAdapter: ListAdapter
     private lateinit var surveyResponse: List<SurveyResponse>
+    private lateinit var dateChosen: String
+    private lateinit var textTitle: StringBuilder
+    private lateinit var textDesc: StringBuilder
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,12 +40,22 @@ class ListActivity : AppCompatActivity(), DatePickerFragment.DialogDateListener,
         supportActionBar!!.title = "List Data Survey"
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
+        dateChosen = " "
+        textTitle =  StringBuilder("Data Survey Keseluruhan")
+        textDesc = StringBuilder("Silahkan klik tombol \"Export to CSV\" untuk mengexport keseluruhan data survey ke dalam format excel.")
+
+        binding.listNote.text = textTitle
+        binding.listDesc.text = textDesc
+
         val factory = ViewModelFactory.getInstance(this)
         viewModel = ViewModelProvider(this, factory)[ListViewModel::class.java]
 
-        getAllSurveyData()
+        viewModel.getAllSurveys().observe(this, {
+            getSurveysData(it)
+        })
         searchSurveys()
         binding.btnExport.setOnClickListener(this)
+        binding.btnRefresh.setOnClickListener(this)
     }
 
     private fun searchSurveys() {
@@ -51,38 +65,37 @@ class ListActivity : AppCompatActivity(), DatePickerFragment.DialogDateListener,
             }
             override fun onQueryTextChange(newText: String?): Boolean {
                 surveyAdapter.filter.filter(newText)
-                binding.listNote.text = StringBuilder("Hasil Pencarian Data Survey")
-                binding.listDesc.text = StringBuilder("Silahkan klik tombol \"Export to CSV\" untuk mengexport data survey hasil pencarian ke dalam format excel.")
-                if (newText.isNullOrBlank()) {
-                    binding.listNote.text = StringBuilder("Data Survey Keseluruhan")
-                    binding.listDesc.text = StringBuilder("Silahkan klik tombol \"Export to CSV\" untuk mengexport keseuruhan data survey ke dalam format excel.")
+                if (!newText.isNullOrBlank()) {
+                    binding.listNote.text = StringBuilder("Hasil Pencarian Data Survey")
+                    binding.listDesc.text  = StringBuilder("Silahkan klik tombol \"Export to CSV\" untuk mengexport data survey hasil pencarian ke dalam format excel.")
+                } else {
+                    binding.listNote.text = textTitle
+                    binding.listDesc.text = textDesc
                 }
                 return false
             }
         })
     }
 
-    private fun getAllSurveyData() {
-        viewModel.getAllSurveys().observe(this, {
-            surveyResponse = it
-            surveyAdapter = ListAdapter(it, this)
-            surveyAdapter.notifyDataSetChanged()
+    private fun getSurveysData(surveys: List<SurveyResponse>) {
+        surveyResponse = surveys
+        surveyAdapter = ListAdapter(surveys, this)
+        surveyAdapter.notifyDataSetChanged()
 
-            binding.apply {
-                shimmerRvSurveys.stopShimmer()
-                shimmerRvSurveys.visibility = GONE
-                rvSurveys.layoutManager = LinearLayoutManager(this@ListActivity)
-                rvSurveys.setHasFixedSize(true)
-                rvSurveys.adapter = surveyAdapter
+        binding.apply {
+            shimmerRvSurveys.stopShimmer()
+            shimmerRvSurveys.visibility = GONE
+            rvSurveys.layoutManager = LinearLayoutManager(this@ListActivity)
+            rvSurveys.setHasFixedSize(true)
+            rvSurveys.adapter = surveyAdapter
+        }
+
+        surveyAdapter.setOnItemClickCallback(object : ListAdapter.OnItemClickCallback {
+            override fun onItemClicked(data: SurveyResponse) {
+                val intent = Intent(this@ListActivity, DetailActivity::class.java)
+                intent.putExtra(DetailActivity.EXTRA_SURVEY, data)
+                startActivity(intent)
             }
-
-            surveyAdapter.setOnItemClickCallback(object : ListAdapter.OnItemClickCallback {
-                override fun onItemClicked(data: SurveyResponse) {
-                    val intent = Intent(this@ListActivity, DetailActivity::class.java)
-                    intent.putExtra(DetailActivity.EXTRA_SURVEY, data)
-                    startActivity(intent)
-                }
-            })
         })
     }
 
@@ -95,12 +108,20 @@ class ListActivity : AppCompatActivity(), DatePickerFragment.DialogDateListener,
         val calendar = Calendar.getInstance()
         calendar.set(year, month, dayOfMonth)
         val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
-        val dateChosen = dateFormat.format(calendar.time)
-        binding.listNote.text = StringBuilder("Data Survey Tanggal $dateChosen")
-        binding.listDesc.text = StringBuilder("Silahkan klik tombol \"Export to CSV\" untuk mengexport data survey tanggal $dateChosen ke dalam format excel.")
+        dateChosen = dateFormat.format(calendar.time)
+
+        textTitle = StringBuilder("Data Survey Tanggal $dateChosen")
+        textDesc = StringBuilder("Silahkan klik tombol \"Export to CSV\" untuk mengexport data survey tanggal $dateChosen ke dalam format excel.")
+        binding.listNote.text = textTitle
+        binding.listDesc.text = textDesc
+
+        viewModel.getSurveysByDate(dateChosen).observe(this, {
+            getSurveysData(it)
+            binding.totalList.visibility = VISIBLE
+        })
     }
 
-    private fun getCSVFileName() : String = "data_survey.csv"
+    private fun getCSVFileName() : String = "Data Survey $dateChosen.csv"
 
     private fun exportDatabaseToCSVFile() {
         val csvFile = generateFile(this, getCSVFileName())
@@ -159,6 +180,16 @@ class ListActivity : AppCompatActivity(), DatePickerFragment.DialogDateListener,
         when (v.id) {
             R.id.btn_export -> {
                 exportDatabaseToCSVFile()
+            }
+            R.id.btn_refresh -> {
+                viewModel.getAllSurveys().observe(this, {
+                    getSurveysData(it)
+                })
+                textTitle =  StringBuilder("Data Survey Keseluruhan")
+                textDesc = StringBuilder("Silahkan klik tombol \"Export to CSV\" untuk mengexport keseluruhan data survey ke dalam format excel.")
+                binding.listNote.text = textTitle
+                binding.listDesc.text = textDesc
+                binding.totalList.visibility = GONE
             }
         }
     }

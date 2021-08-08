@@ -27,13 +27,13 @@ import java.util.*
 class EditActivity : AppCompatActivity() {
     companion object {
         const val EXTRA_SURVEY_UPDATE = "extra_survey_update_id"
-        private const val REQUEST_TAKE_PHOTO_UPDATE = 101
-        private const val REQUEST_CHOOSE_IMAGE_UPDATE = 201
-        private const val PERMISSION_CODE = 1002
         const val EXTRA_RESULT_UPDATE = "extra_result_form_update"
         const val RESULT_CODE_FORM_UPDATE = 120
     }
 
+    private val REQUEST_TAKE_PHOTO_UPDATE = 101
+    private val REQUEST_CHOOSE_IMAGE_UPDATE = 201
+    private val PERMISSION_CODE = 1002
     private lateinit var binding: ActivityEditBinding
     private lateinit var viewModel: EditViewModel
     private lateinit var survey: SurveyEntity
@@ -104,16 +104,13 @@ class EditActivity : AppCompatActivity() {
     private fun takePicture() {
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         if(intent.resolveActivity(packageManager) != null) {
-            var photoFile: File? = null
-            try {
-                photoFile = createImageFile()
-            } catch (e: IOException) {}
-            if (photoFile != null) {
-                imageUri = FileProvider.getUriForFile(
-                    this,
-                    "com.ptpn.surveykayuaro.fileprovider",
-                    photoFile,
-                )
+            val photoFile: File? = try {
+                createImageFile()
+            } catch (e: IOException) {
+                null
+            }
+            photoFile?.also {
+                imageUri  = FileProvider.getUriForFile(this, "com.ptpn.surveykayuaro.fileprovider", it)
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
                 startActivityForResult(intent, REQUEST_TAKE_PHOTO_UPDATE)
             }
@@ -123,11 +120,7 @@ class EditActivity : AppCompatActivity() {
     private fun createImageFile(): File? {
         newFileName = "${survey.namaNarasumber} - ${survey.addedTime}"
         val storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-        val image = File.createTempFile(
-            newFileName,
-            ".jpg",
-            storageDir
-        )
+        val image = File.createTempFile(newFileName, ".jpg", storageDir)
         photoPath = image.absolutePath
         return image
     }

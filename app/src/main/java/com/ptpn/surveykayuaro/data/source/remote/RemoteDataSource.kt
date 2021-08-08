@@ -153,4 +153,49 @@ class RemoteDataSource {
             Log.d(TAG, "delete data $surveyId failed failed : $it")
         }
     }
+
+    fun getSurveysDataByDate(date: String) : LiveData<ArrayList<SurveyResponse>> {
+        val surveyResults = MutableLiveData<ArrayList<SurveyResponse>>()
+        database = FirebaseDatabase.getInstance().getReference("surveys")
+        database.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val surveyList = ArrayList<SurveyResponse>()
+                if (snapshot.exists()) {
+                    for (surveySnapshot in snapshot.children) {
+                        val survey = surveySnapshot.getValue(SurveyResponse::class.java)
+                        val surveyItem = SurveyResponse(
+                                survey?.id,
+                                survey?.namaKedai,
+                                survey?.alamatKedai,
+                                survey?.telpKedai,
+                                survey?.namaNarasumber,
+                                survey?.posisiNarasumber,
+                                survey?.lamaBerjualan,
+                                survey?.tehDijual,
+                                survey?.kenalTehkayuaro,
+                                survey?.tehTerlaris,
+                                survey?.hargaTermurah,
+                                survey?.mauJualTehkayuaro,
+                                survey?.jikaTidak,
+                                survey?.bantuan,
+                                survey?.namaSurveyor,
+                                survey?.saran,
+                                survey?.image,
+                                survey?.addedTime
+                        )
+                        if (survey?.addedTime?.subSequence(0, 10) == date) {
+                            surveyList.add(surveyItem)
+                        }
+                    }
+                }
+                surveyResults.postValue(surveyList)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.d("firebase", "failed to get survey data ${error.message}")
+            }
+        })
+        return surveyResults
+    }
+
 }

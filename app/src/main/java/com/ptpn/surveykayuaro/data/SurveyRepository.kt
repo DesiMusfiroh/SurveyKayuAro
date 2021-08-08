@@ -54,4 +54,6 @@ class SurveyRepository private constructor(
     }
 
     fun totalSurvey() : LiveData<TotalSurveyResponse> = remoteDataSource.getTotalSurvey()
+
+    fun getSurveysDataByDate(date: String): LiveData<ArrayList<SurveyResponse>> = remoteDataSource.getSurveysDataByDate(date)
 }

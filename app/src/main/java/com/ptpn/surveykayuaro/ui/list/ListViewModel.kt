@@ -7,4 +7,5 @@ import com.ptpn.surveykayuaro.data.source.remote.response.SurveyResponse
 
 class ListViewModel(private val surveyRepository: SurveyRepository) : ViewModel() {
     fun getAllSurveys(): LiveData<ArrayList<SurveyResponse>> = surveyRepository.getAllSurveys()
+    fun getSurveysByDate(date: String): LiveData<ArrayList<SurveyResponse>> = surveyRepository.getSurveysDataByDate(date)
 }
