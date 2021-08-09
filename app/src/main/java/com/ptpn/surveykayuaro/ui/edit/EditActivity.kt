@@ -14,6 +14,7 @@ import android.provider.MediaStore
 import android.view.View.VISIBLE
 import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModelProvider
+import com.ptpn.surveykayuaro.R
 import com.ptpn.surveykayuaro.data.source.local.entity.SurveyEntity
 import com.ptpn.surveykayuaro.databinding.ActivityEditBinding
 import com.ptpn.surveykayuaro.viewmodel.ViewModelFactory
@@ -41,6 +42,10 @@ class EditActivity : AppCompatActivity() {
     private lateinit var newFileName: String
     private lateinit var photoPath: String
     private lateinit var updateTime: String
+    private var checkedRbKenalTehKayuAro = 0
+    private var checkedRbMauJualTeh = 0
+    private lateinit var kenalTehKayuAro: String
+    private lateinit var mauJualTehKayuAro: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,18 +66,22 @@ class EditActivity : AppCompatActivity() {
             tvTelpKedai.setText(survey.telpKedai)
             tvLamaBerjualan.setText(survey.lamaBerjualan)
             tvHargaTermurah.setText(survey.hargaTermurah)
-            tvKenalTehkayuaro.setText(survey.kenalTehkayuaro)
-            tvMauJualTehkayuaro.setText(survey.mauJualTehkayuaro)
             tvTehTerlaris.setText(survey.tehTerlaris)
             tvJikaTidak.setText(survey.jikaTidak)
             tvBantuan.setText(survey.bantuan)
             tvSaran.setText(survey.saran)
             tvNamaSurveyor.setText(survey.namaSurveyor)
             tvTehDijual.setText(survey.tehDijual)
+            kenalTehKayuAro = survey.kenalTehkayuaro!!
+            mauJualTehKayuAro = survey.mauJualTehkayuaro!!
+
+            if (kenalTehKayuAro == "sudah") { rgKenalTehkayuaro.check(R.id.sudah) } else { rgKenalTehkayuaro.check(R.id.belum) }
+            if (mauJualTehKayuAro == "iya") { rgMauJualTehkayuaro.check(R.id.iya) } else { rgMauJualTehkayuaro.check(R.id.tidak) }
 
             picture.visibility = VISIBLE
             picture.setImageURI(Uri.parse(survey.image))
         }
+
         imageUri = Uri.parse(survey.image)
 
         val date = Calendar.getInstance().time
@@ -142,6 +151,7 @@ class EditActivity : AppCompatActivity() {
     }
 
     private fun updateDataSurvey() {
+
         binding.apply {
             val namakedai = tvNamaKedai.text.toString()
             val alamatKedai = tvAlamatKedai.text.toString()
@@ -150,14 +160,17 @@ class EditActivity : AppCompatActivity() {
             val posisiNarasumber = tvPosisiNarasumber.text.toString()
             val lamaBerjualan = tvLamaBerjualan.text.toString()
             val tehDijual = tvTehDijual.text.toString()
-            val kenalTehkayuaro = tvKenalTehkayuaro.text.toString()
             val tehTerlaris = tvTehTerlaris.text.toString()
             val hargaTermurah = tvHargaTermurah.text.toString()
-            val mauJualTehkayuaro = tvMauJualTehkayuaro.text.toString()
             val jikaTidak = tvJikaTidak.text.toString()
             val bantuan = tvBantuan.text.toString()
             val namaSurveyor = tvNamaSurveyor.text.toString()
             val saran = tvSaran.text.toString()
+
+            checkedRbKenalTehKayuAro = rgKenalTehkayuaro.checkedRadioButtonId
+            checkedRbMauJualTeh = rgMauJualTehkayuaro.checkedRadioButtonId
+            kenalTehKayuAro = resources.getResourceEntryName(checkedRbKenalTehKayuAro)
+            mauJualTehKayuAro = resources.getResourceEntryName(checkedRbMauJualTeh)
 
             val survey = SurveyEntity(
                 survey.id,
@@ -168,10 +181,10 @@ class EditActivity : AppCompatActivity() {
                 posisiNarasumber,
                 lamaBerjualan,
                 tehDijual,
-                kenalTehkayuaro,
+                kenalTehKayuAro,
                 tehTerlaris,
                 hargaTermurah,
-                mauJualTehkayuaro,
+                mauJualTehKayuAro,
                 jikaTidak,
                 bantuan,
                 namaSurveyor,

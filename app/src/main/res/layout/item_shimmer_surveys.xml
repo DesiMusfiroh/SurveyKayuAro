@@ -36,7 +36,7 @@
         </androidx.cardview.widget.CardView>
 
         <TextView
-            android:id="@+id/tv_item_kedai"
+            android:id="@+id/tv_item_narasumber"
             style="@style/Text.Medium"
             android:layout_width="0dp"
             android:layout_marginStart="16dp"
@@ -52,7 +52,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_item_narasumber"
+            android:id="@+id/tv_item_kedai"
             style="@style/Text.Regular"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -67,7 +67,7 @@
             android:textColor="@color/shimmer"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/cardView"
-            app:layout_constraintTop_toBottomOf="@+id/tv_item_kedai" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_item_narasumber" />
 
         <TextView
             android:id="@+id/tv_alamat_kedai"
@@ -84,7 +84,7 @@
             android:textColor="@color/shimmer"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/cardView"
-            app:layout_constraintTop_toBottomOf="@+id/tv_item_narasumber" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_item_kedai" />
 
         <LinearLayout
             android:id="@+id/view"

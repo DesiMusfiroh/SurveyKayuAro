@@ -50,13 +50,12 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:fontFamily="@font/noto_sans_bold"
+                    android:fontFamily="@font/gilroy_bold"
                     android:gravity="center"
                     android:text="@string/title"
                     android:textColor="@color/black"
                     android:maxLines="2"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textSize="20sp" />
 
             </androidx.cardview.widget.CardView>
 
@@ -127,9 +126,8 @@
             android:layout_marginBottom="8dp"
             android:layout_marginTop="24dp"
             android:text="@string/rekap"
+            android:fontFamily="@font/merriweather_sans"
             android:textStyle="bold"
-            android:fontFamily="@font/poppins_semibold"
-            android:textColor="@color/black"
             android:textSize="18sp"/>
 
         <TextView
@@ -138,10 +136,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="8dp"
-            android:text="@string/jumlah_survey"
-            android:textStyle="bold"
-            android:fontFamily="@font/poppins_semibold"
-            android:textColor="@color/black"/>
+            android:text="@string/jumlah_survey"/>
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -154,7 +149,6 @@
             android:layout_gravity="center"
             android:backgroundTint="@color/placeholder">
             <TextView
-                style="@style/Text.Medium"
                 android:id="@+id/tv_total_survey"
                 android:layout_gravity="center"
                 android:gravity="center"
@@ -162,6 +156,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
                 android:textStyle="bold"
+                android:textColor="@color/black"
                 android:text="@string/responden"/>
         </androidx.cardview.widget.CardView>
 
@@ -171,10 +166,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="20dp"
-            android:text="@string/brand"
-            android:textStyle="bold"
-            android:fontFamily="@font/poppins_semibold"
-            android:textColor="@color/black"/>
+            android:text="@string/brand"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -205,6 +197,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
+                        android:textColor="@color/black"
                         android:text="@string/kenal" />
 
                     <TextView
@@ -214,8 +207,9 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="@string/jumlah_kenal"
+                        android:textStyle="bold"
                         android:textSize="20sp"
-                        android:textStyle="bold" />
+                        android:textColor="@color/black" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -244,7 +238,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="@string/belum_kenal" />
+                        android:text="@string/belum_kenal"
+                        android:textColor="@color/black"/>
 
                     <TextView
                         style="@style/Text.Medium"
@@ -254,7 +249,8 @@
                         android:gravity="center"
                         android:text="@string/jumlah_belum_kenal"
                         android:textSize="20sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:textColor="@color/black"/>
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -267,10 +263,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:text="@string/mau_jual"
-            android:textStyle="bold"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/poppins_semibold"
-            android:textColor="@color/black"/>
+            android:layout_marginTop="8dp"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -301,7 +294,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="@string/mau" />
+                        android:text="@string/mau"
+                        android:textColor="@color/black"/>
 
                     <TextView
                         style="@style/Text.Medium"
@@ -311,7 +305,8 @@
                         android:gravity="center"
                         android:text="@string/jumlah_mau_jual"
                         android:textSize="20sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:textColor="@color/black"/>
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -340,6 +335,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
+                        android:textColor="@color/black"
                         android:text="@string/tidak_mau" />
 
                     <TextView
@@ -350,7 +346,8 @@
                         android:gravity="center"
                         android:text="@string/jumlah_tidak_mau_jual"
                         android:textSize="20sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:textColor="@color/black"/>
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -358,16 +355,13 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
-            style="@style/Text.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:text="@string/data_survey"
+            android:fontFamily="@font/merriweather_sans"
             android:textStyle="bold"
-            android:fontFamily="@font/poppins_semibold"
-            android:textColor="@color/black"
             android:textSize="18sp"/>
 
         <androidx.cardview.widget.CardView

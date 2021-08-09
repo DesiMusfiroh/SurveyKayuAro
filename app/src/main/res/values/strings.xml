@@ -69,15 +69,16 @@
     <string name="jumlah_survey">Jumlah Responden Survey</string>
     <string name="brand">Brand Teh Kayu Aro</string>
     <string name="mau_jual">Mau menjual Teh Kayu Aro ?</string>
-    <string name="kenal">Kenal</string>
-    <string name="responden">98 Responden</string>
+    <string name="kenal">Sudah Kenal</string>
+    <string name="responden">... Responden</string>
     <string name="belum_kenal">Belum Kenal</string>
-    <string name="jumlah_kenal">64</string>
-    <string name="jumlah_belum_kenal">34</string>
-    <string name="jumlah_mau_jual">44</string>
+    <string name="jumlah_kenal">...</string>
+    <string name="jumlah_belum_kenal">...</string>
+    <string name="jumlah_mau_jual">...</string>
     <string name="tidak_mau">Tidak Mau Jual</string>
-    <string name="jumlah_tidak_mau_jual">54</string>
+    <string name="jumlah_tidak_mau_jual">...</string>
     <string name="mau">Mau Menjual</string>
     <string name="sudah_kenal">Sudah Kenal</string>
     <string name="refresh">Refresh Page</string>
+    <string name="tanggal_survey">Tanggal Survey</string>
 </resources>

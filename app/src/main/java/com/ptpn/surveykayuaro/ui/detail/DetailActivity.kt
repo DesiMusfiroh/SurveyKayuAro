@@ -46,6 +46,11 @@ class DetailActivity : AppCompatActivity() {
             tvJikaTidak.text = survey.jikaTidak
             tvMauJualTehkayuaro.text = survey.mauJualTehkayuaro
             tvKenalTehkayuaro.text = survey.kenalTehkayuaro
+            tvTehDijual.text = survey.tehDijual
+            tvTehTerlaris.text = survey.tehTerlaris
+            tvHargaTermurah.text = survey.hargaTermurah
+            tvNamaSurveyor.text = survey.namaSurveyor
+            tvAddedTime.text = survey.addedTime
 
             Glide.with(this@DetailActivity)
                 .load(survey.image)

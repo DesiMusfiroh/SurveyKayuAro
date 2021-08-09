@@ -13,7 +13,6 @@ import com.ptpn.surveykayuaro.data.source.remote.response.TotalSurveyResponse
 class RemoteDataSource {
 
     private lateinit var database: DatabaseReference
-
     companion object {
         fun getInstance(): RemoteDataSource {
             return RemoteDataSource()

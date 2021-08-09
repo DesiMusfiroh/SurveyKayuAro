@@ -47,7 +47,9 @@
                 android:background="@drawable/bg_input"
                 android:elevation="12dp"
                 android:focusableInTouchMode="true"
-                android:fontFamily="@font/noto_sans_bold"
+                android:fontFamily="@font/cantarell_regular"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
                 app:iconifiedByDefault="false"
                 app:layout_constraintBottom_toBottomOf="@+id/view3"
                 app:layout_constraintStart_toStartOf="parent"
@@ -56,13 +58,13 @@
 
             <TextView
                 android:id="@+id/list_note"
-                style="@style/Text.Medium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="40dp"
                 android:layout_marginEnd="20dp"
-                android:fontFamily="@font/poppins_semibold"
+                android:fontFamily="@font/merriweather_sans"
+                android:textStyle="bold"
                 android:textSize="16sp"
                 android:text="@string/list_note"
                 android:gravity="center"
@@ -72,13 +74,14 @@
 
             <TextView
                 android:id="@+id/list_desc"
-                style="@style/Text.Regular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="20dp"
-                android:fontFamily="@font/poppins_semibold"
+                android:fontFamily="@font/cantarell_regular"
                 android:text="@string/list_desc"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/list_note" />
@@ -91,14 +94,18 @@
                 android:paddingHorizontal="20dp"
                 android:paddingVertical="8dp"
                 android:visibility="gone"
+                android:gravity="center_horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/list_desc">
 
                 <androidx.appcompat.widget.AppCompatButton
+                    style="@style/Text.Medium"
                     android:id="@+id/btn_refresh"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingHorizontal="16dp"
+                    android:textSize="12sp"
                     android:text="@string/refresh"/>
 
             </LinearLayout>

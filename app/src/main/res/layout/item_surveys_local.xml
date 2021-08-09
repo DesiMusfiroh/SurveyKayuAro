@@ -10,14 +10,14 @@
     app:cardCornerRadius="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="250dp"
+        android:layout_width="240dp"
         android:layout_height="200dp"
         android:background="@color/placeholder">
 
         <ImageView
             android:id="@+id/img_item_image"
             android:layout_width="match_parent"
-            android:layout_height="130dp"
+            android:layout_height="120dp"
             android:contentDescription="@string/title_image"
             android:scaleType="centerCrop"
             android:src="@color/grey"
@@ -54,20 +54,22 @@
 
             <TextView
                 style="@style/Text.Medium"
-                android:id="@+id/tv_item_kedai"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_semibold"
-                android:text="@string/nama_kedai"
-                android:maxLines="1"/>
-
-            <TextView
-                style="@style/Text.Regular"
                 android:id="@+id/tv_item_narasumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/noto_sans"
+                android:fontFamily="@font/merriweather_sans"
+                android:text="@string/nama_kedai"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/black"
+                android:maxLines="1"/>
+
+            <TextView
+                style="@style/Text.Medium"
+                android:id="@+id/tv_item_kedai"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:text="@string/nama_narasumber"
+                android:textColor="@color/black"
                 android:maxLines="1"/>
 
             <TextView
@@ -75,8 +77,9 @@
                 android:id="@+id/tv_item_alamat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/noto_sans"
                 android:text="@string/alamat_kedai"
+                android:layout_marginBottom="8dp"
+                android:textColor="@color/black"
                 android:maxLines="1"/>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

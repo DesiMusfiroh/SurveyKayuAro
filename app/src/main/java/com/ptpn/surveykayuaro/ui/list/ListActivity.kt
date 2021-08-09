@@ -67,10 +67,8 @@ class ListActivity : AppCompatActivity(), DatePickerFragment.DialogDateListener,
                 surveyAdapter.filter.filter(newText)
                 if (!newText.isNullOrBlank()) {
                     binding.listNote.text = StringBuilder("Hasil Pencarian Data Survey")
-                    binding.listDesc.text  = StringBuilder("Silahkan klik tombol \"Export to CSV\" untuk mengexport data survey hasil pencarian ke dalam format excel.")
                 } else {
                     binding.listNote.text = textTitle
-                    binding.listDesc.text = textDesc
                 }
                 return false
             }

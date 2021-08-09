@@ -47,8 +47,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         supportActionBar?.hide()
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true)
-
         val factory = ViewModelFactory.getInstance(this)
         viewModel = ViewModelProvider(this, factory)[MainViewModel::class.java]
 
@@ -71,7 +69,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             }
         })
         viewModel.totalSurvey().observe(this, {
-            binding.tvTotalSurvey.text = it.totalSurvey.toString()
+            binding.tvTotalSurvey.text = StringBuilder("${it.totalSurvey.toString()} Responden")
             binding.tvMauMenjual.text = it.totalMauJual.toString()
             binding.tvTidakMauMenjual.text = it.totalTidakMauJual.toString()
             binding.tvSudahKenal.text = it.totalSudahKenal.toString()

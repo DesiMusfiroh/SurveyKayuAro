@@ -67,17 +67,6 @@ class FormActivity : AppCompatActivity() {
         binding.btnTakePicture.setOnClickListener{ takePicture() }
         binding.btnChoosePhoto.setOnClickListener { choosePhoto() }
         fileName = " "
-
-        binding.apply {
-            if (rgKenalTehkayuaro.isClickable) {
-                checkedRbKenalTehKayuAro = rgKenalTehkayuaro.checkedRadioButtonId
-                kenalTehKayuAro = resources.getResourceEntryName(checkedRbKenalTehKayuAro)
-            }
-            if (rgMauJualTehkayuaro.isClickable) {
-                checkedRbMauJualTeh = rgMauJualTehkayuaro.checkedRadioButtonId
-                mauJualTehKayuAro = resources.getResourceEntryName(checkedRbMauJualTeh)
-            }
-        }
     }
 
     private fun choosePhoto() {
@@ -157,6 +146,11 @@ class FormActivity : AppCompatActivity() {
             val bantuan = tvBantuan.text.toString()
             val namaSurveyor = tvNamaSurveyor.text.toString()
             val saran = tvSaran.text.toString()
+
+            checkedRbKenalTehKayuAro = rgKenalTehkayuaro.checkedRadioButtonId
+            checkedRbMauJualTeh = rgMauJualTehkayuaro.checkedRadioButtonId
+            kenalTehKayuAro = resources.getResourceEntryName(checkedRbKenalTehKayuAro)
+            mauJualTehKayuAro = resources.getResourceEntryName(checkedRbMauJualTeh)
 
             if (namakedai.isEmpty()) {
                 tvNamaKedai.error = "Mohon diisi terlebih dahulu!"

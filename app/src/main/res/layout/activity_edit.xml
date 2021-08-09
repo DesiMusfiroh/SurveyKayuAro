@@ -37,6 +37,10 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_input"
                 android:hint="@string/nama_kedai"
+                android:fontFamily="@font/cantarell_regular"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:inputType="textCapSentences"
                 android:padding="16dp" />
 
             <TextView
@@ -53,6 +57,10 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_input"
                 android:hint="@string/alamat_kedai"
+                android:fontFamily="@font/cantarell_regular"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:inputType="textCapSentences"
                 android:padding="16dp" />
 
             <TextView
@@ -70,6 +78,9 @@
                 android:background="@drawable/bg_input"
                 android:hint="@string/telp_kedai"
                 android:inputType="number"
+                android:fontFamily="@font/cantarell_regular"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
                 android:padding="16dp" />
 
             <TextView
@@ -86,6 +97,10 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_input"
                 android:hint="@string/nama_narasumber"
+                android:fontFamily="@font/cantarell_regular"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:inputType="textCapSentences"
                 android:padding="16dp" />
 
             <TextView
@@ -102,6 +117,10 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_input"
                 android:hint="@string/posisi_narasumber"
+                android:fontFamily="@font/cantarell_regular"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:inputType="textCapSentences"
                 android:padding="16dp" />
 
             <TextView
@@ -118,6 +137,10 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_input"
                 android:hint="@string/lama_berjualan"
+                android:fontFamily="@font/cantarell_regular"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:inputType="textCapSentences"
                 android:padding="16dp" />
 
             <TextView
@@ -134,6 +157,10 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_input"
                 android:hint="@string/teh_dijual"
+                android:fontFamily="@font/cantarell_regular"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:inputType="textCapSentences"
                 android:padding="16dp" />
 
             <TextView
@@ -144,13 +171,28 @@
                 android:layout_marginBottom="8dp"
                 android:text="@string/title_kenal_tehkayuaro" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tv_kenal_tehkayuaro"
+            <RadioGroup
+                android:id="@+id/rg_kenal_tehkayuaro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_input"
-                android:hint="@string/kenal_tehkayuaro"
-                android:padding="16dp" />
+                android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/sudah"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/cantarell_regular"
+                    android:text="@string/sudah_kenal"/>
+                <RadioButton
+                    android:id="@+id/belum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/cantarell_regular"
+                    android:text="@string/belum_kenal"/>
+            </RadioGroup>
 
             <TextView
                 style="@style/Text.Medium"
@@ -166,6 +208,10 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_input"
                 android:hint="@string/teh_terlaris"
+                android:fontFamily="@font/cantarell_regular"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:inputType="textCapSentences"
                 android:padding="16dp" />
 
             <TextView
@@ -182,6 +228,9 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_input"
                 android:hint="@string/harga_termurah"
+                android:fontFamily="@font/cantarell_regular"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
                 android:inputType="number"
                 android:padding="16dp" />
 
@@ -193,13 +242,28 @@
                 android:layout_marginBottom="8dp"
                 android:text="@string/title_mau_jual_tehkayuaro" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tv_mau_jual_tehkayuaro"
+            <RadioGroup
+                android:id="@+id/rg_mau_jual_tehkayuaro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_input"
-                android:hint="@string/mau_jual_tehkayuaro"
-                android:padding="16dp" />
+                android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/iya"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/cantarell_regular"
+                    android:text="@string/mau"/>
+                <RadioButton
+                    android:id="@+id/tidak"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/cantarell_regular"
+                    android:text="@string/tidak_mau"/>
+            </RadioGroup>
 
             <TextView
                 style="@style/Text.Medium"
@@ -215,6 +279,10 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_input"
                 android:hint="@string/jika_tidak"
+                android:fontFamily="@font/cantarell_regular"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:inputType="textCapSentences"
                 android:padding="16dp" />
 
             <TextView
@@ -231,6 +299,10 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_input"
                 android:hint="@string/bantuan"
+                android:fontFamily="@font/cantarell_regular"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:inputType="textCapSentences"
                 android:padding="16dp" />
 
             <TextView
@@ -247,6 +319,10 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_input"
                 android:hint="@string/nama_surveyor"
+                android:fontFamily="@font/cantarell_regular"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:inputType="textCapSentences"
                 android:padding="16dp" />
 
             <TextView
@@ -263,6 +339,10 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_input"
                 android:hint="@string/saran"
+                android:fontFamily="@font/cantarell_regular"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:inputType="textCapSentences"
                 android:padding="16dp" />
 
             <TextView
@@ -274,15 +354,19 @@
                 android:text="@string/title_image" />
 
             <androidx.appcompat.widget.AppCompatButton
+                style="@style/Text.Medium"
                 android:id="@+id/btn_take_picture"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="12sp"
                 android:text="@string/take_picture" />
 
             <androidx.appcompat.widget.AppCompatButton
+                style="@style/Text.Medium"
                 android:id="@+id/btn_choose_photo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="12sp"
                 android:text="@string/choose_from_galery" />
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -299,7 +383,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="16dp"
                 android:background="@drawable/bg_button"
-                android:text="@string/simpan_perubahan" />
+                android:text="@string/simpan" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
