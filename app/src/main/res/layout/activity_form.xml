@@ -376,6 +376,15 @@
                 android:src="@drawable/kebun_teh"
                 android:visibility="gone"/>
 
+            <TextView
+                style="@style/Text.Regular"
+                android:id="@+id/warning_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/warning_image"
+                android:visibility="gone"
+                android:textColor="@color/grey"/>
+
             <Button
                 android:id="@+id/btn_save"
                 android:layout_width="match_parent"

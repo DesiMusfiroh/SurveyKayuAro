@@ -25,6 +25,10 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 import android.net.Uri
+import android.util.Log
+import android.view.View.GONE
+import com.ptpn.surveykayuaro.R
+import kotlin.properties.Delegates
 
 class FormActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFormBinding
@@ -33,10 +37,10 @@ class FormActivity : AppCompatActivity() {
     private lateinit var addedTime: String
     private lateinit var fileName: String
     private lateinit var imageUri: Uri
-    private var checkedRbKenalTehKayuAro = 0
-    private var checkedRbMauJualTeh = 0
-    private var kenalTehKayuAro = "belum"
-    private var mauJualTehKayuAro = "iya"
+    private var checkedRbKenalTehKayuAro = -1
+    private var checkedRbMauJualTeh = -1
+    private lateinit var kenalTehKayuAro: String
+    private lateinit var mauJualTehKayuAro: String
     private val REQUEST_TAKE_PHOTO = 100
     private val REQUEST_CHOOSE_IMAGE = 200
     private val PERMISSION_CODE = 1001
@@ -117,6 +121,7 @@ class FormActivity : AppCompatActivity() {
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == REQUEST_TAKE_PHOTO) {
                 binding.picture.visibility = VISIBLE
+                binding.warningImage.visibility = GONE
                 binding.picture.setImageURI(imageUri)
             }
             if (requestCode == REQUEST_CHOOSE_IMAGE) {
@@ -124,6 +129,7 @@ class FormActivity : AppCompatActivity() {
                 val namaNarasumber = binding.tvNamaNarasumber.text.toString()
                 fileName = "$namaNarasumber - $addedTime"
                 binding.picture.visibility = VISIBLE
+                binding.warningImage.visibility = GONE
                 binding.picture.setImageURI(imageUri)
             }
         }
@@ -146,11 +152,8 @@ class FormActivity : AppCompatActivity() {
             val bantuan = tvBantuan.text.toString()
             val namaSurveyor = tvNamaSurveyor.text.toString()
             val saran = tvSaran.text.toString()
-
             checkedRbKenalTehKayuAro = rgKenalTehkayuaro.checkedRadioButtonId
             checkedRbMauJualTeh = rgMauJualTehkayuaro.checkedRadioButtonId
-            kenalTehKayuAro = resources.getResourceEntryName(checkedRbKenalTehKayuAro)
-            mauJualTehKayuAro = resources.getResourceEntryName(checkedRbMauJualTeh)
 
             if (namakedai.isEmpty()) {
                 tvNamaKedai.error = "Mohon diisi terlebih dahulu!"
@@ -176,6 +179,25 @@ class FormActivity : AppCompatActivity() {
                 tvSaran.error = "Mohon diisi terlebih dahulu!"
                 tvSaran.requestFocus()
                 return
+            }
+
+            if (!::imageUri.isInitialized) {
+                warningImage.visibility = VISIBLE
+                warningImage.requestFocus()
+                return
+            }
+
+            if (checkedRbKenalTehKayuAro == -1) {
+                rgKenalTehkayuaro.requestFocus()
+                return
+            } else {
+                kenalTehKayuAro = resources.getResourceEntryName(checkedRbKenalTehKayuAro)
+            }
+            if (checkedRbMauJualTeh == -1) {
+                rgKenalTehkayuaro.requestFocus()
+                return
+            } else {
+                mauJualTehKayuAro = resources.getResourceEntryName(checkedRbMauJualTeh)
             }
 
             val survey = SurveyEntity(

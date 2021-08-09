@@ -4,7 +4,6 @@ import android.net.Uri
 import androidx.lifecycle.LiveData
 import com.ptpn.surveykayuaro.data.source.local.entity.SurveyEntity
 import com.ptpn.surveykayuaro.data.source.remote.response.SurveyResponse
-import com.ptpn.surveykayuaro.vo.Resource
 
 interface SurveyDataSource {
     fun getSurveys(): LiveData<List<SurveyEntity>>

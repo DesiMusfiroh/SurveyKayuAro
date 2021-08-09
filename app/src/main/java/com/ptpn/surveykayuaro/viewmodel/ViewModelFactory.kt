@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.ptpn.surveykayuaro.ui.main.MainViewModel
 import com.ptpn.surveykayuaro.data.SurveyRepository
 import com.ptpn.surveykayuaro.di.Injection
-import com.ptpn.surveykayuaro.ui.detail.DetailViewModel
 import com.ptpn.surveykayuaro.ui.detaillocal.DetailLocalViewModel
 import com.ptpn.surveykayuaro.ui.edit.EditViewModel
 import com.ptpn.surveykayuaro.ui.form.FormViewModel
@@ -36,9 +35,6 @@ class ViewModelFactory private constructor(private val mSurveyRepository: Survey
             }
             modelClass.isAssignableFrom(ListViewModel::class.java) -> {
                 ListViewModel(mSurveyRepository) as T
-            }
-            modelClass.isAssignableFrom(DetailViewModel::class.java) -> {
-                DetailViewModel(mSurveyRepository) as T
             }
             modelClass.isAssignableFrom(DetailLocalViewModel::class.java) -> {
                 DetailLocalViewModel(mSurveyRepository) as T
