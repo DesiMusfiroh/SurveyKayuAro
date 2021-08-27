@@ -52,13 +52,15 @@ class RemoteDataSource {
                     val survey = surveySnapshot.getValue(SurveyResponse::class.java)
                     if (survey?.mauJualTehkayuaro == "iya") {
                         totalMauJual += 1
+                    } else {
+                        totalTidakMauJual += 1
                     }
                     if (survey?.kenalTehkayuaro == "sudah") {
                         totalSudahKenal += 1
+                    } else {
+                        totalBelumKenal += 1
                     }
                 }
-                totalTidakMauJual =  snapshot.children.count() - totalMauJual
-                totalBelumKenal = snapshot.children.count() - totalSudahKenal
                 val totalSurveyResponse = TotalSurveyResponse(
                         snapshot.children.count(),
                         totalMauJual,
@@ -196,5 +198,4 @@ class RemoteDataSource {
         })
         return surveyResults
     }
-
 }

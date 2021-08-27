@@ -5,20 +5,23 @@ package com.ptpn.surveykayuaro.ui.main
 import android.app.Dialog
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.database.CursorWindow
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import androidx.appcompat.app.AppCompatActivity
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.airbnb.lottie.LottieAnimationView
 import com.github.doyaaaaaken.kotlincsv.dsl.csvWriter
-import com.google.firebase.database.FirebaseDatabase
 import com.ptpn.surveykayuaro.R
 import com.ptpn.surveykayuaro.data.source.local.entity.SurveyEntity
 import com.ptpn.surveykayuaro.databinding.ActivityMainBinding
@@ -29,13 +32,13 @@ import com.ptpn.surveykayuaro.ui.list.ListActivity
 import com.ptpn.surveykayuaro.utils.generateFile
 import com.ptpn.surveykayuaro.utils.goToFileIntent
 import com.ptpn.surveykayuaro.viewmodel.ViewModelFactory
-import java.lang.StringBuilder
+import java.lang.reflect.Field
+import java.util.*
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityMainBinding
     private lateinit var surveyList: List<SurveyEntity>
     private lateinit var viewModel: MainViewModel
-    private lateinit var adapter: MainAdapter
     companion object {
         private const val REQUEST_CODE_FORM = 100
     }
@@ -50,16 +53,24 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         val factory = ViewModelFactory.getInstance(this)
         viewModel = ViewModelProvider(this, factory)[MainViewModel::class.java]
 
-        viewModel.getSurveys().observe(this, {surveys ->
-            if (surveys != null) {
-                binding.surveyNull.visibility = GONE
+        viewModel.totalSurvey().observe(this, {
+            binding.tvTotalSurvey.text = StringBuilder("${it.totalSurvey.toString()} Responden")
+            binding.tvMauMenjual.text = it.totalMauJual.toString()
+            binding.tvTidakMauMenjual.text = it.totalTidakMauJual.toString()
+            binding.tvSudahKenal.text = it.totalSudahKenal.toString()
+            binding.tvBelumKenal.text = it.totalBelumKenal.toString()
+        })
+
+        viewModel.getSurveys().observe(this, { surveys ->
+            if (surveys !== null) {
                 surveyList = surveys
 
                 binding.rvSurveys.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
                 binding.rvSurveys.setHasFixedSize(true)
-                adapter = MainAdapter(surveyList)
+                val adapter = MainAdapter(surveyList)
                 binding.rvSurveys.adapter = adapter
                 adapter.setOnItemClickCallback(object : MainAdapter.OnItemClickCallback {
+                    @RequiresApi(Build.VERSION_CODES.O)
                     override fun onItemClicked(data: SurveyEntity) {
                         val detailIntent = Intent(this@MainActivity, DetailLocalActivity::class.java)
                         detailIntent.putExtra(EXTRA_SURVEY_ID, data.id)
@@ -68,16 +79,19 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 })
             }
         })
-        viewModel.totalSurvey().observe(this, {
-            binding.tvTotalSurvey.text = StringBuilder("${it.totalSurvey.toString()} Responden")
-            binding.tvMauMenjual.text = it.totalMauJual.toString()
-            binding.tvTidakMauMenjual.text = it.totalTidakMauJual.toString()
-            binding.tvSudahKenal.text = it.totalSudahKenal.toString()
-            binding.tvBelumKenal.text = it.totalBelumKenal.toString()
-        })
+
         binding.btnForm.setOnClickListener(this)
         binding.btnExport.setOnClickListener(this)
         binding.btnList.setOnClickListener(this)
+
+        // to handle error Row too big to fit into CursorWindow
+        try {
+            val field: Field = CursorWindow::class.java.getDeclaredField("sCursorWindowSize")
+            field.isAccessible = true
+            field.set(null, 100 * 1024 * 1024) //the 100MB is the new size
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     override fun onClick(v: View) {
@@ -175,7 +189,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         val lottie = dialog.findViewById(R.id.lottie_dialog) as LottieAnimationView
         if (check) {
             lottie.setAnimation("success.json")
-            tvMessage.text = StringBuilder( "Sukses!... \nData Survey \nberhasil ditambahkan!")
+            tvMessage.text = StringBuilder("Sukses!... \nData Survey \nberhasil ditambahkan!")
         } else {
             lottie.setAnimation("failed.json")
             tvMessage.text = StringBuilder("Gagal !!. \nData Survey \nbelum berhasil disimpan!")
@@ -187,6 +201,4 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         super.onBackPressed()
         finishAffinity()
     }
-
-
 }

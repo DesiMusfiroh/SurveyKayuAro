@@ -7,12 +7,15 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.view.View.GONE
 import android.view.View.VISIBLE
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
@@ -20,15 +23,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.ptpn.surveykayuaro.data.source.local.entity.SurveyEntity
 import com.ptpn.surveykayuaro.databinding.ActivityFormBinding
 import com.ptpn.surveykayuaro.viewmodel.ViewModelFactory
+import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
-import android.net.Uri
-import android.util.Log
-import android.view.View.GONE
-import com.ptpn.surveykayuaro.R
-import kotlin.properties.Delegates
 
 class FormActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFormBinding
@@ -37,6 +36,7 @@ class FormActivity : AppCompatActivity() {
     private lateinit var addedTime: String
     private lateinit var fileName: String
     private lateinit var imageUri: Uri
+    private lateinit var imageString: String
     private var checkedRbKenalTehKayuAro = -1
     private var checkedRbMauJualTeh = -1
     private lateinit var kenalTehKayuAro: String
@@ -79,15 +79,17 @@ class FormActivity : AppCompatActivity() {
                 val permissions = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
                 requestPermissions(permissions, PERMISSION_CODE)
             } else{
-                val intent = Intent(Intent.ACTION_PICK)
-                intent.type = "image/*"
-                startActivityForResult(intent, REQUEST_CHOOSE_IMAGE)
+                selectImage()
             }
         } else {
-            val intent = Intent(Intent.ACTION_PICK)
-            intent.type = "image/*"
-            startActivityForResult(intent, REQUEST_CHOOSE_IMAGE)
+            selectImage()
         }
+    }
+
+    private fun selectImage() {
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, REQUEST_CHOOSE_IMAGE)
     }
 
     @SuppressLint("QueryPermissionsNeeded")
@@ -123,6 +125,7 @@ class FormActivity : AppCompatActivity() {
                 binding.picture.visibility = VISIBLE
                 binding.warningImage.visibility = GONE
                 binding.picture.setImageURI(imageUri)
+                imageString = encoder(imageUri)
             }
             if (requestCode == REQUEST_CHOOSE_IMAGE) {
                 imageUri = data?.data!!
@@ -131,6 +134,7 @@ class FormActivity : AppCompatActivity() {
                 binding.picture.visibility = VISIBLE
                 binding.warningImage.visibility = GONE
                 binding.picture.setImageURI(imageUri)
+                imageString = encoder(imageUri)
             }
         }
     }
@@ -217,7 +221,7 @@ class FormActivity : AppCompatActivity() {
                     bantuan,
                     namaSurveyor,
                     saran,
-                    imageUri.toString(),
+                    imageString,
                     addedTime)
             viewModel.insert(survey, imageUri)
         }
@@ -226,5 +230,14 @@ class FormActivity : AppCompatActivity() {
         resultFormIntent.putExtra(EXTRA_RESULT, true)
         setResult(RESULT_CODE_FORM, resultFormIntent)
         finish()
+    }
+
+    @SuppressLint("NewApi")
+    fun encoder(uri: Uri): String{
+        val byteArrayOutputStream = ByteArrayOutputStream()
+        val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, uri)
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
+        val imageBytes: ByteArray = byteArrayOutputStream.toByteArray()
+        return Base64.getEncoder().encodeToString(imageBytes)
     }
 }

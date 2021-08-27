@@ -2,9 +2,12 @@ package com.ptpn.surveykayuaro.ui.detaillocal
 
 import android.app.Dialog
 import android.content.Intent
+import android.database.CursorWindow
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -12,6 +15,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import com.airbnb.lottie.LottieAnimationView
@@ -23,8 +27,10 @@ import com.ptpn.surveykayuaro.ui.edit.EditActivity.Companion.EXTRA_RESULT_UPDATE
 import com.ptpn.surveykayuaro.ui.edit.EditActivity.Companion.RESULT_CODE_FORM_UPDATE
 import com.ptpn.surveykayuaro.viewmodel.ViewModelFactory
 import java.lang.StringBuilder
+import java.util.*
 
 @Suppress("DEPRECATION")
+@RequiresApi(Build.VERSION_CODES.O)
 class DetailLocalActivity : AppCompatActivity(), View.OnClickListener {
     companion object {
         const val EXTRA_SURVEY_ID = "extra_survey_id"
@@ -78,8 +84,9 @@ class DetailLocalActivity : AppCompatActivity(), View.OnClickListener {
             tvNamaSurveyor.text = survey.namaSurveyor
             tvAddedTime.text = survey.addedTime
 
-            val imageUri = Uri.parse(survey.image)
-            imgImage.setImageURI(imageUri)
+            val bytes: ByteArray = Base64.getDecoder().decode(survey.image)
+            val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+            imgImage.setImageBitmap(bitmap)
         }
     }
 
@@ -119,7 +126,7 @@ class DetailLocalActivity : AppCompatActivity(), View.OnClickListener {
         when (v.id) {
             R.id.btn_update -> {
                 val updateIntent = Intent(this@DetailLocalActivity, EditActivity::class.java)
-                updateIntent.putExtra(EditActivity.EXTRA_SURVEY_UPDATE, survey)
+                updateIntent.putExtra(EditActivity.EXTRA_SURVEY_UPDATE, survey.id)
                 startActivityForResult(updateIntent, REQUEST_CODE_FORM_UPDATE)
             }
         }

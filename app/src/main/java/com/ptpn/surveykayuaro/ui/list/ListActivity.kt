@@ -1,6 +1,9 @@
 package com.ptpn.surveykayuaro.ui.list
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -31,6 +34,7 @@ class ListActivity : AppCompatActivity(), DatePickerFragment.DialogDateListener,
     private lateinit var dateChosen: String
     private lateinit var textTitle: StringBuilder
     private lateinit var textDesc: StringBuilder
+    private val PERMISSION_CODE = 1001
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +43,13 @@ class ListActivity : AppCompatActivity(), DatePickerFragment.DialogDateListener,
 
         supportActionBar!!.title = "List Data Survey"
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED){
+                val permissions = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
+                requestPermissions(permissions, PERMISSION_CODE)
+            }
+        }
 
         dateChosen = " "
         textTitle =  StringBuilder("Data Survey Keseluruhan")
@@ -191,5 +202,4 @@ class ListActivity : AppCompatActivity(), DatePickerFragment.DialogDateListener,
             }
         }
     }
-
 }

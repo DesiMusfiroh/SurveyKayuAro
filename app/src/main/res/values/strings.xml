@@ -53,7 +53,7 @@
     <string name="choose_date">Pilih Bulan</string>
     <string name="list_note">Data Survey Keseluruhan </string>
     <string name="list_desc">Silahkan klik tombol "Export to CSV" untuk mengexport seluruh data survey ke dalam format excel. </string>
-    <string name="data_null">Belum ada data survey yang anda masukkan ! \nSilahkan isi Form Survey !</string>
+    <string name="data_null">Silahkan isi Form Survey !</string>
     <string name="delete_survey">Hapus Survey</string>
     <string name="delete_alert">Hapus data survey ini ?</string>
     <string name="no">Tidak</string>
