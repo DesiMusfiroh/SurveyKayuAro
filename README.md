@@ -1,8 +1,5 @@
 # Survey Kayu Aro
 
-## Interface
-![Survey Kayu Aro](https://user-images.githubusercontent.com/62416304/131167905-8704a45b-9a4d-44b1-9c22-a21a4f0844dc.png)
-
 # Features
 - Input Data Survey (Create, Read, Update, Delete)
 - Pick image from galery 
@@ -19,5 +16,6 @@
 - Lottie Animations
 - Shimmer
 
-
+## Interface
+![Survey Kayu Aro](https://user-images.githubusercontent.com/62416304/131167905-8704a45b-9a4d-44b1-9c22-a21a4f0844dc.png)
 
